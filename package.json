@@ -32,5 +32,8 @@
     "bcryptjs": "^3.0.3",
     "express": "^4.22.1",
     "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "canvas": "^3.2.0"
   }
 }

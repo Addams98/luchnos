@@ -7,26 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Couleurs exactes extraites du logo Luchnos
+        // Palette extraite du logo Luchnos (extraction automatique)
         primary: {
-          DEFAULT: '#191F34', // Bleu nuit du fond du logo
-          dark: '#1A2034',
-          light: '#1C2235'
+          DEFAULT: '#14283C', // Bleu marine du fond (53.77% du logo)
+          light: '#1F3D5C',
+          dark: '#0A1420'
         },
         gold: {
-          DEFAULT: '#FFC100', // Jaune du texte et flamme
-          dark: '#E6AD00',
-          light: '#FFD033'
+          DEFAULT: '#FFC100', // Jaune doré de la flamme
+          light: '#FFD700',
+          dark: '#E5AC00'
         },
         copper: {
-          DEFAULT: '#CC7447', // Orange/marron clair de la lampe
-          dark: '#9F4A15',
-          light: '#D98B5F'
+          DEFAULT: '#C8783C', // Cuivre/bronze de la lampe
+          light: '#DC9664',
+          dark: '#A05028'
+        },
+        // Couleurs d'accent pour les cartes (harmonieuses avec le logo)
+        accent: {
+          green: '#2D7A3E',      // Pour carte Événements
+          greenLight: '#3A9B51',
+          orange: '#E67E22',     // Pour carte Contact (remplace violet)
+          orangeLight: '#F39C12',
+          terracotta: '#B4643C', // Alternative terre cuite
+          lightBlue: '#3498DB'   // Variation bleue
         },
         flame: {
-          yellow: '#FFC100', // Jaune flamme
-          orange: '#FF8C00', // Orange flamme
-          glow: '#FFD700' // Halo lumineux
+          yellow: '#FFC100',
+          orange: '#FF8C00',
+          glow: '#FFD700'
         },
         slate: {
           DEFAULT: '#64748b',

@@ -96,20 +96,20 @@ const Home = () => {
       title: 'Événements',
       description: 'Restez informé de nos différents programmes.',
       link: '/evenements',
-      borderColor: 'border-l-green-500',
+      borderColor: 'border-l-accent-green',
       iconBg: 'bg-green-50',
-      iconColor: 'text-green-600',
-      buttonColor: 'text-green-600 border-green-600 hover:bg-green-600'
+      iconColor: 'text-accent-green',
+      buttonColor: 'text-accent-green border-accent-green hover:bg-accent-green'
     },
     {
       icon: FaUsers,
       title: 'Contact',
       description: 'Contactez-nous pour toute question, prière, suggestion ou soutient.',
       link: '/contact',
-      borderColor: 'border-l-purple-500',
-      iconBg: 'bg-purple-50',
-      iconColor: 'text-purple-500',
-      buttonColor: 'text-purple-600 border-purple-600 hover:bg-purple-600'
+      borderColor: 'border-l-accent-orange',
+      iconBg: 'bg-orange-50',
+      iconColor: 'text-accent-orange',
+      buttonColor: 'text-accent-orange border-accent-orange hover:bg-accent-orange'
     }
   ];
 
