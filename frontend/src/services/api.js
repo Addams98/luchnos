@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Détection automatique de l'environnement
+const isProduction = window.location.hostname.includes('onrender.com');
+const API_URL = isProduction 
+  ? 'https://luchnos.onrender.com/api'
+  : (import.meta.env.VITE_API_URL || 'http://localhost:5000/api');
+
+console.log('🔗 API URL:', API_URL);
 
 // Instance Axios
 const api = axios.create({
