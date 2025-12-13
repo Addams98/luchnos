@@ -124,7 +124,7 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
     type: 'default',
     badge: 'BIENVENUE',
     title: 'Lampe Allumée (Luchnos)',
-    description: 'Une lumière qui éclaire les nations - Présenter Yéhoshoua car IL revient',
+    description: 'Présenter Yéhoshoua car IL revient',
     image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1600',
     link: '/presentation'
   });
