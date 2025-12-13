@@ -35,19 +35,22 @@ const MissionsFormations = () => {
       title: "Mission évangélique",
       description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
       icon: FaBullhorn,
-      color: "bg-gold"
+      color: "bg-primary",
+      iconColor: "text-gold"
     },
     {
       title: "Mission Filles2SaraY",
       description: "Restaurer l'identité de la Femme (Sous la tente de Sarah et les programmes divers)",
       icon: FaUsers,
-      color: "bg-copper"
+      color: "bg-gold",
+      iconColor: "text-primary"
     },
     {
       title: "Mission sociale",
       description: "Empreinte de l'amour (distribution gratuite et programmes divers)",
       icon: FaHandHoldingHeart,
-      color: "bg-red-500"
+      color: "bg-copper",
+      iconColor: "text-white"
     }
   ];
 
@@ -56,25 +59,29 @@ const MissionsFormations = () => {
       title: "Formation et équipement",
       description: "Adressés aux personnes converties et les aspirants au service",
       icon: FaBible,
-      color: "bg-gold"
+      color: "bg-primary",
+      iconColor: "text-gold"
     },
     {
       title: "Formation des Kephale",
       description: "Adressés aux hommes (époux, fiancé et aspirant)",
       icon: FaUsers,
-      color: "bg-copper"
+      color: "bg-gold",
+      iconColor: "text-primary"
     },
     {
       title: "Formation Khayil/Ezer",
       description: "Adressées à toutes les catégories de femme",
       icon: FaUsers,
-      color: "bg-primary"
+      color: "bg-copper",
+      iconColor: "text-white"
     },
     {
       title: "Formation Tsaphah",
       description: "Adressés aux sentinelles",
       icon: FaFire,
-      color: "bg-red-500"
+      color: "bg-red-500",
+      iconColor: "text-white"
     }
   ];
 
@@ -189,8 +196,8 @@ const MissionsFormations = () => {
                   viewport={{ once: true }}
                   className="card p-8 text-center"
                 >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 ${mission.color} rounded-full mb-6`}>
-                    <IconComponent className="text-white text-2xl" />
+                  <div className={`inline-flex items-center justify-center w-16 h-16 ${mission.color} rounded-full mb-6 shadow-lg`}>
+                    <IconComponent className={`${mission.iconColor} text-2xl`} />
                   </div>
                   <h3 className="text-xl font-bold text-primary mb-4">
                     {mission.title}
@@ -234,8 +241,8 @@ const MissionsFormations = () => {
                   viewport={{ once: true }}
                   className="card p-6"
                 >
-                  <div className={`inline-flex items-center justify-center w-14 h-14 ${formation.color} rounded-full mb-4`}>
-                    <IconComponent className="text-white text-xl" />
+                  <div className={`inline-flex items-center justify-center w-14 h-14 ${formation.color} rounded-full mb-4 shadow-lg`}>
+                    <IconComponent className={`${formation.iconColor} text-xl`} />
                   </div>
                   <h3 className="text-lg font-bold text-primary mb-3">
                     {formation.title}
