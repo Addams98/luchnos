@@ -57,14 +57,14 @@ const MissionsFormations = () => {
   const formationsData = [
     {
       title: "Formation et équipement",
-      description: "Adressés aux personnes converties et les aspirants au service",
+      description: "Adressée aux personnes converties et les aspirants au service",
       icon: FaBible,
       color: "bg-primary",
       iconColor: "text-gold"
     },
     {
       title: "Formation des Kephale",
-      description: "Adressés aux hommes (époux, fiancé et aspirant)",
+      description: "Adressée aux hommes (époux, fiancé et aspirant)",
       icon: FaUsers,
       color: "bg-gold",
       iconColor: "text-primary"
