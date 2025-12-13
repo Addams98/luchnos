@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaFire, FaFacebook, FaYoutube, FaInstagram, FaTwitter, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
+import { FaFire, FaFacebook, FaYoutube, FaInstagram, FaTwitter, FaEnvelope, FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { parametresAPI } from '../services/api';
 
 const Footer = () => {
@@ -142,28 +142,39 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:contact@luchnos.org"
+                  href="mailto:Luchnos2020@gmail.com"
                   className="flex items-center space-x-2 text-slate-300 hover:text-gold transition-colors text-sm"
                 >
                   <FaEnvelope />
                   <span>Luchnos2020@gmail.com</span>
-                  
                 </a>
+              </li>
+              <li>
                 <a
-                  href="mailto:contact@luchnos.org"
+                  href="mailto:fillesdesaray@gmail.com"
                   className="flex items-center space-x-2 text-slate-300 hover:text-gold transition-colors text-sm"
                 >
                   <FaEnvelope />
                   <span>fillesdesaray@gmail.com</span>
-                  
                 </a>
               </li>
-              <li className="text-slate-300 text-sm">
-                <span className="block">‎+241 62562910</span>
+              <li>
+                <a
+                  href="tel:+24162562910"
+                  className="flex items-center space-x-2 text-slate-300 hover:text-gold transition-colors text-sm"
+                >
+                  <FaPhone />
+                  <span>+241 62 56 29 10</span>
+                </a>
               </li>
-              <li className="text-slate-300 text-sm">
-                
-                
+              <li>
+                <a
+                  href="tel:+27787220419"
+                  className="flex items-center space-x-2 text-slate-300 hover:text-gold transition-colors text-sm"
+                >
+                  <FaPhone />
+                  <span>+27 78 722 0419</span>
+                </a>
               </li>
             </ul>
           </div>
