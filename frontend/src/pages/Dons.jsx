@@ -1,17 +1,9 @@
 import { motion } from 'framer-motion';
-import { FaPaypal, FaWhatsapp, FaPhone, FaMoneyBillWave } from 'react-icons/fa';
+import { FaWhatsapp, FaPhone, FaMoneyBillWave } from 'react-icons/fa';
 import { SiMoneygram } from 'react-icons/si';
 
 const Dons = () => {
   const moyensPaiement = [
-    {
-      icon: FaPaypal,
-      nom: "PayPal",
-      info: "Luchnos2020@gmail.com",
-      description: "Paiement sécurisé via PayPal",
-      color: "bg-blue-600",
-      link: "https://www.paypal.com/paypalme/luchnos2020"
-    },
     {
       icon: SiMoneygram,
       nom: "MoneyGram",
