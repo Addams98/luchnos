@@ -7,35 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Palette extraite du logo Luchnos (extraction automatique)
+        // Couleurs officielles du logo Luchnos (fournies par le client)
         primary: {
-          DEFAULT: '#14283C', // Bleu marine du fond (53.77% du logo)
-          light: '#1F3D5C',
-          dark: '#0A1420'
+          DEFAULT: '#191F34', // Bleu nuit du fond (couleur dominante)
+          light: '#1C2235',   // Variante claire
+          dark: '#1A2034'     // Variante foncée
         },
         gold: {
-          DEFAULT: '#FFC100', // Jaune doré de la flamme
-          light: '#FFD700',
-          dark: '#E5AC00'
+          DEFAULT: '#FFC100', // Jaune du texte et de la flamme
+          light: '#FFD700',   // Jaune lumineux pour effets
+          dark: '#E5AC00'     // Jaune foncé
         },
         copper: {
-          DEFAULT: '#C8783C', // Cuivre/bronze de la lampe
-          light: '#DC9664',
-          dark: '#A05028'
+          DEFAULT: '#CC7447', // Orange/marron clair de la lampe
+          light: '#DC9664',   // Variante claire
+          dark: '#9F4A15'     // Marron foncé (ombrages et contours)
         },
-        // Couleurs d'accent pour les cartes (harmonieuses avec le logo)
+        // Couleurs d'accent harmonieuses avec le logo
         accent: {
-          green: '#2D7A3E',      // Pour carte Événements
+          green: '#2D7A3E',      // Carte Événements
           greenLight: '#3A9B51',
-          orange: '#E67E22',     // Pour carte Contact (remplace violet)
+          orange: '#E67E22',     // Carte Contact
           orangeLight: '#F39C12',
           terracotta: '#B4643C', // Alternative terre cuite
           lightBlue: '#3498DB'   // Variation bleue
         },
         flame: {
-          yellow: '#FFC100',
-          orange: '#FF8C00',
-          glow: '#FFD700'
+          yellow: '#FFC100',  // Jaune flamme
+          orange: '#FF8C00',  // Orange flamme
+          glow: '#FFD700'     // Halo lumineux
         },
         slate: {
           DEFAULT: '#64748b',
@@ -53,9 +53,10 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #191F34 0%, #1C2235 100%)',
-        'gradient-gold': 'linear-gradient(135deg, #FFC100 0%, #FFD033 100%)',
-        'gradient-flame': 'radial-gradient(circle, #FFC100 0%, #FF8C00 60%, #FFD700 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #191F34 0%, #1C2235 100%)', // Bleu nuit du logo
+        'gradient-gold': 'linear-gradient(135deg, #FFC100 0%, #FFD700 100%)',    // Jaune du logo
+        'gradient-flame': 'radial-gradient(circle, #FFC100 0%, #FF8C00 60%, #FFD700 100%)', // Flamme
+        'gradient-copper': 'linear-gradient(135deg, #CC7447 0%, #9F4A15 100%)',  // Cuivre de la lampe
       }
     },
   },
