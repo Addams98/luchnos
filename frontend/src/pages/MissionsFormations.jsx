@@ -36,7 +36,7 @@ const MissionsFormations = () => {
       description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
       icon: FaBullhorn,
       color: "bg-primary",
-      iconColor: "text-gold"
+      iconColor: "text-red-500"
     },
     {
       title: "Mission Filles2SaraY",
