@@ -104,7 +104,7 @@ const Home = () => {
     {
       icon: FaUsers,
       title: 'Contact',
-      description: 'Contactez-nous pour toute question, prière, suggestion ou soutient.',
+      description: 'Contactez-nous pour toute question, prière, suggestion ou soutien.',
       link: '/contact',
       borderColor: 'border-l-accent-orange',
       iconBg: 'bg-orange-50',

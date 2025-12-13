@@ -1,0 +1,67 @@
+# 🧹 NETTOYAGE DES VIDÉOS TERMINÉ
+
+## ✅ Base de données locale
+Le nettoyage a été effectué avec succès sur votre base locale :
+- **50 doublons supprimés** (IDs 51-100)
+- **7 titres corrigés** (caractères spéciaux HTML remplacés)
+- **50 vidéos restantes** (sans doublons)
+
+## 🚀 Pour appliquer sur Render
+
+### Méthode 1 : Via le Dashboard Render (RECOMMANDÉ)
+
+1. **Accédez à votre Dashboard Render** :
+   - Allez sur https://dashboard.render.com
+   - Sélectionnez votre base de données `luchnos_db`
+
+2. **Ouvrez le Shell SQL** :
+   - Cliquez sur l'onglet **"Shell"** ou **"Connect"**
+   - Ou utilisez le bouton **"Execute SQL"**
+
+3. **Exécutez le script** :
+   - Copiez tout le contenu du fichier `clean-render.sql`
+   - Collez-le dans le shell SQL
+   - Exécutez
+
+### Méthode 2 : Via psql (si installé)
+
+```bash
+psql "postgresql://luchnos_db_user:PBMHvlHVqcPPYcvfX25H2LSdN8bBEqkl@dpg-ctcebs9u0jms73fhihf0-a.oregon-postgres.render.com/luchnos_db?sslmode=require" < clean-render.sql
+```
+
+### Méthode 3 : Via l'API (automatique)
+
+Si vous avez réinitialisé le mot de passe admin sur Render avec `Luchnos@2025`, exécutez :
+
+```bash
+node clean-all.js
+```
+
+## 📋 Ce que fait le script
+
+1. **Supprime les doublons** : Vidéos avec IDs 51-100
+2. **Corrige les apostrophes** : 
+   - `&#39;` → `'`
+   - `'` → `'` 
+   - `'` → `'`
+3. **Vérifie le résultat** : Affiche un compte rendu
+
+## ⚠️ Important
+
+- Le script utilise `BEGIN` et `COMMIT` pour la sécurité
+- Si une erreur survient, faites `ROLLBACK;` pour annuler
+- Vérifiez le résultat avant de quitter
+
+## 🎯 Résultat attendu
+
+Après exécution, vous devriez voir :
+- 50 vidéos au total (au lieu de 100)
+- Titres propres sans `&#39;` ou caractères HTML
+- Apostrophes affichées correctement
+
+## 📞 En cas de problème
+
+Si le script ne fonctionne pas sur Render, vous pouvez :
+1. Me contacter pour assistance
+2. Utiliser l'interface web Render pour modifier manuellement
+3. Attendre que les changements locaux se synchronisent (si vous avez un système de sync)
