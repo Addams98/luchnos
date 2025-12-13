@@ -32,6 +32,7 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/youtube', require('./routes/youtube'));
 app.use('/api/presentation', require('./routes/presentation'));
 app.use('/api/parametres', require('./routes/parametres'));
+app.use('/api/maintenance', require('./routes/maintenance'));
 
 // Route de test
 app.get('/', (req, res) => {
