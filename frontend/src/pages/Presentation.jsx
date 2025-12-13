@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaFire, FaBible, FaBook, FaUsers, FaChild, FaBullhorn, FaHandHoldingHeart } from 'react-icons/fa';
+import { FaFire, FaBible, FaBook, FaUsers, FaChild, FaBullhorn, FaHandHoldingHeart, FaLightbulb, FaGraduationCap, FaHeart, FaPen, FaFemale, FaSeedling } from 'react-icons/fa';
 
 const Presentation = () => {
   const compartiments = [
@@ -82,29 +82,32 @@ const Presentation = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
-              "Rallumer et éclairer les saints en vue de la préparation au retour de l'Epoux.",
-              "Former et équiper les disciples et les aspirants au service.",
-              "Évangéliser les âmes.",
-              "Encourager les chrétiens au travers des œuvres écrites.",
-              "Encourager les femmes à revenir à leur identité en Yéhoshoua.",
-              "Préparer la relève et instruire la jeunesse selon les voies du Seigneur."
-            ].map((mission, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6 flex items-start gap-4"
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-gold rounded-full flex items-center justify-center">
-                  <FaFire className="text-white text-xl" />
-                </div>
-                <p className="text-slate-700 text-lg leading-relaxed flex-1">
-                  {mission}
-                </p>
-              </motion.div>
-            ))}
+              { text: "Rallumer et éclairer les saints en vue de la préparation au retour de l'Epoux.", icon: FaLightbulb, color: "bg-yellow-500" },
+              { text: "Former et équiper les disciples et les aspirants au service.", icon: FaGraduationCap, color: "bg-blue-500" },
+              { text: "Évangéliser les âmes.", icon: FaBullhorn, color: "bg-red-500" },
+              { text: "Encourager les chrétiens au travers des œuvres écrites.", icon: FaPen, color: "bg-purple-500" },
+              { text: "Encourager les femmes à revenir à leur identité en Yéhoshoua.", icon: FaFemale, color: "bg-pink-500" },
+              { text: "Préparer la relève et instruire la jeunesse selon les voies du Seigneur.", icon: FaSeedling, color: "bg-green-500" }
+            ].map((mission, index) => {
+              const IconComponent = mission.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="card p-6 flex items-start gap-4"
+                >
+                  <div className={`flex-shrink-0 w-12 h-12 ${mission.color} rounded-full flex items-center justify-center shadow-lg`}>
+                    <IconComponent className="text-white text-xl" />
+                  </div>
+                  <p className="text-slate-700 text-lg leading-relaxed flex-1">
+                    {mission.text}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
