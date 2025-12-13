@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaPlay, FaEye, FaClock, FaSearch, FaYoutube } from 'react-icons/fa';
+import { FaPlay, FaClock, FaSearch, FaYoutube } from 'react-icons/fa';
 import { multimediaAPI } from '../services/api';
 
 const Multimedia = () => {
@@ -275,15 +275,7 @@ const Multimedia = () => {
                       {video.description}
                     </p>
                     
-                    <div className="flex items-center justify-between text-sm text-slate-500 pt-3 border-t border-slate-100">
-                      <div className="flex items-center space-x-2">
-                        <span>👤 {video.auteur || 'Évangéliste Paul Martin'}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <FaEye />
-                        <span>{video.vues || 0} vues</span>
-                      </div>
-                    </div>
+
                   </div>
                 </motion.div>
               ))}
