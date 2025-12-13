@@ -1,0 +1,61 @@
+# 🎯 NETTOYAGE DES VIDÉOS SUR RENDER - MODE AUTOMATIQUE
+
+## ✅ Déploiement en cours...
+
+Le code a été poussé sur GitHub. Render va automatiquement redéployer l'application.
+
+## 🚀 Étapes pour exécuter le nettoyage :
+
+### 1. Attendre le redéploiement (2-3 minutes)
+   - Allez sur https://dashboard.render.com
+   - Vérifiez que le déploiement est terminé (badge vert "Live")
+
+### 2. Exécuter le nettoyage
+   
+   **Option A** : Via navigateur
+   - Ouvrez simplement cette URL dans votre navigateur :
+   ```
+   https://luchnos.onrender.com/api/maintenance/clean-videos-now
+   ```
+
+   **Option B** : Via curl
+   ```bash
+   curl https://luchnos.onrender.com/api/maintenance/clean-videos-now
+   ```
+
+   **Option C** : Via PowerShell
+   ```powershell
+   Invoke-WebRequest -Uri "https://luchnos.onrender.com/api/maintenance/clean-videos-now"
+   ```
+
+### 3. Vérifier le résultat
+   
+   Vous devriez voir une réponse JSON comme :
+   ```json
+   {
+     "success": true,
+     "message": "Nettoyage des vidéos effectué avec succès",
+     "result": {
+       "deleted": 50,
+       "corrected": 7,
+       "total": 50,
+       "withIssues": 0
+     }
+   }
+   ```
+
+## 📊 Ce qui sera nettoyé :
+   - ✅ Suppression des 50 vidéos en double (IDs 51-100)
+   - ✅ Correction des caractères HTML (&#39; → ')
+   - ✅ Correction des apostrophes courbes (' → ')
+
+## ⚠️ IMPORTANT :
+   - **N'exécutez cette URL qu'UNE SEULE FOIS**
+   - Une fois nettoyé, les doublons sont définitivement supprimés
+   - Vous pouvez vérifier sur https://luchnos-frontend-web.onrender.com/multimedia
+
+## 🔄 Statut actuel :
+   - ✅ Local : Nettoyé (50 vidéos propres)
+   - ⏳ Render : En attente d'exécution
+
+Dites-moi quand le déploiement est terminé, et nous lancerons le nettoyage !
