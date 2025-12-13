@@ -383,16 +383,15 @@ const Presentation = () => {
             viewport={{ once: true }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Notre <span className="text-gold">Vision</span>
             </h2>
-            <div className="bg-slate-800 rounded-2xl p-8 md:p-12 mb-8">
-              <p className="text-white text-xl md:text-2xl italic mb-6">
-                "Encourager les saints à se préparer au retour du Seigneur et à répondre à son appel. "
+            <div className="bg-slate-800 rounded-2xl p-8 md:p-12 mb-8 border-l-4 border-gold">
+              <p className="text-white text-xl md:text-2xl italic mb-6 text-center">
+                « Encourager les saints à se préparer au retour du Seigneur et à répondre à son appel. »
               </p>
-              <p className="text-slate-300 text-lg leading-relaxed">
-                Nous œuvrons pour que chaque enfant du Seigneur soit responsable de son salut et de l’appel qu’il a reçu afin de bien le remplir. Nous travaillons également pour que chaque femme retrouve sa véritable identité dans le Seigneur. 
-Et  enfin  nous œuvrons  pour préparer la relève à marcher dans les voies du Seigneur.
+              <p className="text-slate-200 text-lg leading-relaxed text-justify">
+                Nous œuvrons pour que chaque enfant du Seigneur soit responsable de son salut et de l'appel qu'il a reçu afin de bien le remplir. Nous travaillons également pour que chaque femme retrouve sa véritable identité dans le Seigneur. Et enfin nous œuvrons pour préparer la relève à marcher dans les voies du Seigneur.
               </p>
             </div>
         
@@ -414,9 +413,8 @@ Et  enfin  nous œuvrons  pour préparer la relève à marcher dans les voies du
             <h2 className="text-3xl font-bold text-primary mb-6">
               Rejoignez-nous dans cette mission
             </h2>
-            <p className="text-slate-700 text-lg mb-8 leading-relaxed">
-              Il ne s’agit pas  d'une adhésion à un ministère, mais plutôt d'une participation ou d'une contribution  volontaire pour  l’avancement de l’œuvre du Seigneur, avec ton don, ton talent et ce qu’il t’a donné en tant que membre du Corps de Christ. 
-              Nous devons conjuguer ensemble nos talents pour le Royaume du Père
+            <p className="text-slate-700 text-lg mb-8 leading-relaxed text-justify">
+              Il ne s'agit pas d'une adhésion à un ministère, mais plutôt d'une participation ou d'une contribution volontaire pour l'avancement de l'œuvre du Seigneur, avec ton don, ton talent et ce qu'il t'a donné en tant que membre du Corps de Christ. Nous devons conjuguer ensemble nos talents pour le Royaume du Père.
             </p>
             <Link
               to="/contact"
