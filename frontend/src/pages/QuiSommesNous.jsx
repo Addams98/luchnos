@@ -203,7 +203,7 @@ const QuiSommesNous = () => {
                 </div>
                 <p className="text-slate-700 leading-relaxed">
                   Après cela, Lampe Allumée (Luchnos) est né : un service destiné à la mission, la formation, l'équipement spirituel des hommes, 
-                  des femmes, des enfants et des jeunes par différents programmes et la production d'ouvrages. Avec un équipe des frères et des soeurs, nous oeuvrons dans ce sens depuis quelques années.
+                  des femmes, des enfants et des jeunes par différents programmes et la production d'ouvrages. Avec une équipe des frères et des sœurs, nous œuvrons dans ce sens depuis quelques années.
                 </p>
               </motion.div>
             </div>
