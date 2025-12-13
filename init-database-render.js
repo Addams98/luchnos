@@ -43,35 +43,12 @@ async function initDatabase() {
       console.log('ℹ️  Admin existe déjà');
     }
 
-    // 2. Paramètres du site (optionnel)
+    // 2. Paramètres et liens sociaux
     console.log('\n⚙️  Configuration des paramètres...');
-    try {
-      await client.query(`
-        CREATE TABLE IF NOT EXISTS parametres_site (
-          id SERIAL PRIMARY KEY,
-          nom_site VARCHAR(255) DEFAULT 'Luchnos',
-          description_site TEXT,
-          email_contact VARCHAR(255),
-          telephone_contact VARCHAR(50),
-          adresse TEXT,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-      `);
-      
-      await client.query(`
-        INSERT INTO parametres_site (nom_site, description_site, email_contact, telephone_contact, adresse)
-        VALUES (
-          'Luchnos - Lampe Allumée',
-          'Présenter Yéhoshoua (Jésus) car il est le salut des humains et il revient',
-          'contact@luchnos.com',
-          '+33 1 23 45 67 89',
-          'France'
-        ) ON CONFLICT DO NOTHING;
-      `);
-      console.log('✅ Paramètres créés');
-    } catch (e) {
-      console.log('⚠️  Paramètres ignorés (table optionnelle)');
-    }
+    const migrationPath = path.join(__dirname, 'backend', 'migrations', 'add_parametres_liens_sociaux.sql');
+    const migrationSQL = fs.readFileSync(migrationPath, 'utf8');
+    await client.query(migrationSQL);
+    console.log('✅ Paramètres et liens sociaux créés');
 
     // 3. Vérification
     console.log('\n🔍 Vérification des données...');
