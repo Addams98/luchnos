@@ -1,0 +1,54 @@
+# 📝 INFORMATIONS DE DÉPLOIEMENT
+
+## 🔐 Credentials & URLs
+
+### JWT Secret (Backend)
+```
+344436e97f728fa7523171998db74ced7b6405a286ebe6fa41f08ba741fb5f15
+```
+
+### GitHub Repository
+```
+https://github.com/Addams98/luchnos
+```
+
+### Database PostgreSQL (Render)
+```
+Internal Database URL: postgresql://luchnos_db_user:O5F7S2L5kf7m2QOmJOT3b1fdDcCwvbIW@dpg-d4uc6e7gi27c738m804g-a/luchnos_db
+External Database URL: [Visible sur Render, pour connexion externe]
+```
+
+### Backend URL (Render)
+```
+https://luchnos.onrender.com
+```
+
+### Frontend URL (Render)
+```
+https://luchnos-frontend.onrender.com
+```
+
+---
+
+## 📋 PROCHAINES ÉTAPES
+
+### ✅ Terminé:
+- [x] Code sur GitHub
+- [x] JWT_SECRET généré
+
+### 🔄 En cours:
+- [x] PostgreSQL créée sur Render
+- [x] Backend déployé
+- [x] Frontend déployé
+- [x] Base de données initialisée
+
+### 📌 Admin par défaut:
+```
+Email: admin@luchnos.com
+Password: Admin@123
+```
+⚠️ À changer immédiatement après connexion!
+
+---
+
+**Complétez ce fichier au fur et à mesure du déploiement.**
