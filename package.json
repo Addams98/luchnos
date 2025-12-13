@@ -12,7 +12,7 @@
     "build:render": "node build-render.js",
     "render-build": "npm install && cd backend && npm install",
     "render-start": "cd backend && npm start",
-    "frontend-build": "node build-render.js",
+    "frontend-build": "npm install && node build-render.js",
     "frontend-start": "node serve-frontend.js"
   },
   "keywords": [
