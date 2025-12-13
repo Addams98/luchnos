@@ -1,0 +1,225 @@
+/* Effets 3D pour les livres */
+.book-cover-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.6s ease;
+  cursor: pointer;
+}
+
+.book-cover-3d img {
+  transform: rotateY(-5deg) rotateX(2deg);
+  box-shadow: 
+    -10px 10px 20px rgba(0, 0, 0, 0.3),
+    -20px 20px 40px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(218, 165, 32, 0.1);
+  transition: all 0.4s ease;
+  border-radius: 4px;
+}
+
+.book-cover-3d:hover img {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 30px 60px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(218, 165, 32, 0.3);
+}
+
+/* Effet de brillance sur hover */
+.book-cover-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.book-cover-3d:hover::before {
+  opacity: 1;
+}
+
+/* Effet de dos de livre */
+.book-cover-3d::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.1)
+  );
+  transform: skewY(-2deg);
+  border-radius: 2px 0 0 2px;
+  transition: all 0.4s ease;
+}
+
+.book-cover-3d:hover::after {
+  left: -4px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.05)
+  );
+}
+
+/* Effets 3D pour les événements */
+.event-image-3d {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.5s ease;
+}
+
+.event-image-3d img {
+  transform: scale(1) rotateX(0deg) rotateY(0deg);
+  transition: all 0.5s ease;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.event-image-3d:hover img {
+  transform: scale(1.1) rotateX(2deg) rotateY(2deg);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(218, 165, 32, 0.3);
+}
+
+/* Overlay avec gradient doré */
+.event-image-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(218, 165, 32, 0.2) 0%,
+    transparent 50%,
+    rgba(218, 165, 32, 0.2) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.event-image-3d:hover::before {
+  opacity: 1;
+}
+
+/* Animation de pulsation pour les événements à venir */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.3),
+      0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.3),
+      0 5px 15px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(218, 165, 32, 0.4);
+  }
+}
+
+.event-image-3d.upcoming img {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Effet de carte qui se soulève */
+.card-lift {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-lift:hover {
+  transform: translateY(-10px);
+}
+
+/* Effet de page qui tourne */
+.page-turn {
+  transform-origin: left center;
+  transition: transform 0.6s ease;
+}
+
+.page-turn:hover {
+  transform: rotateY(-15deg);
+}
+
+/* Container pour effet 3D */
+.perspective-container {
+  perspective: 1500px;
+  perspective-origin: center;
+}
+
+/* Effet de profondeur */
+.depth-effect {
+  position: relative;
+}
+
+.depth-effect::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.05));
+  border-radius: 12px;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.depth-effect:hover::before {
+  top: 15px;
+  left: 15px;
+  right: -15px;
+  bottom: -15px;
+  opacity: 0.8;
+}
+
+/* Glare effect (reflet) */
+.glare-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.glare-effect::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.glare-effect:hover::after {
+  top: 100%;
+  left: 100%;
+}

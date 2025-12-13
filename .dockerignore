@@ -1,0 +1,44 @@
+# Dépendances
+node_modules/
+npm-debug.log
+
+# Git
+.git/
+.github/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Scripts de développement
+*.bat
+*.ps1
+setup-database.*
+update-admin-password.sql
+import-database.sql
+
+# Fichiers temporaires
+*.log
+*.tmp
+*.bak
+*.backup
+*.old
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+test/
+tests/
+*.test.js
+*.spec.js

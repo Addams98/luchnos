@@ -20,8 +20,8 @@ Site web complet pour le ministère "Lampe Allumée (Luchnos)" - Un ministère d
 ### Backend
 - **Node.js** - Runtime JavaScript
 - **Express.js** - Framework web
-- **MySQL** - Base de données
-- **XAMPP** - Serveur local MySQL
+- **PostgreSQL** - Base de données
+- **pg** - Driver PostgreSQL pour Node.js
 
 ### Frontend
 - **React.js** - Librairie UI
@@ -54,7 +54,7 @@ Site web complet pour le ministère "Lampe Allumée (Luchnos)" - Un ministère d
 
 ### Prérequis
 - Node.js (v16 ou supérieur)
-- XAMPP (pour MySQL)
+- PostgreSQL (v12 ou supérieur)
 - Git
 
 ### 1. Cloner le projet
@@ -77,19 +77,20 @@ npm install
 
 ## ⚙️ Configuration
 
-### 1. Démarrer XAMPP
+### 1. Installer et démarrer PostgreSQL
 
-1. Ouvrez **XAMPP Control Panel**
-2. Démarrez **Apache** et **MySQL**
-3. Cliquez sur **Admin** pour MySQL (ouvre phpMyAdmin)
+1. Téléchargez PostgreSQL depuis https://www.postgresql.org/download/windows/
+2. Installez PostgreSQL avec le mot de passe `WILFRIED98` pour l'utilisateur `postgres`
+3. Le service PostgreSQL démarre automatiquement sur le port 5432
 
 ### 2. Créer la base de données
 
-1. Dans phpMyAdmin, créez une nouvelle base de données nommée `luchnos_db`
-2. Importez le fichier SQL :
-   - Allez dans l'onglet **SQL**
-   - Copiez le contenu de `backend/config/database.sql`
-   - Exécutez le script
+1. Ouvrez pgAdmin ou utilisez la ligne de commande
+2. Créez une nouvelle base de données nommée `luchnos_db`
+3. Importez le schéma :
+```powershell
+psql -U postgres -d luchnos_db -f backend\config\postgresql-schema.sql
+```
 
 ### 3. Configurer les variables d'environnement
 
@@ -103,10 +104,10 @@ Copy-Item .env.example .env
 ```env
 PORT=5000
 DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=
+DB_USER=postgres
+DB_PASSWORD=WILFRIED98
 DB_NAME=luchnos_db
-DB_PORT=3306
+DB_PORT=5432
 ```
 
 #### Frontend
@@ -150,8 +151,8 @@ Ouvrez votre navigateur et allez à : **http://localhost:3000**
 C:\Luchnos\
 ├── backend/
 │   ├── config/
-│   │   ├── database.js          # Configuration MySQL
-│   │   └── database.sql         # Script SQL
+│   │   ├── database.js          # Configuration PostgreSQL
+│   │   └── postgresql-schema.sql # Schéma PostgreSQL
 │   ├── routes/
 │   │   ├── evenements.js        # Routes événements
 │   │   ├── livres.js            # Routes livres
@@ -310,7 +311,7 @@ npm run preview    # Prévisualiser la build
 ## 🐛 Dépannage
 
 ### Le backend ne démarre pas
-- Vérifiez que XAMPP MySQL est démarré
+- Vérifiez que PostgreSQL est démarré (port 5432)
 - Vérifiez les identifiants dans `.env`
 - Vérifiez que le port 5000 est libre
 
@@ -321,8 +322,8 @@ npm run preview    # Prévisualiser la build
 
 ### Erreurs de base de données
 - Vérifiez que la base `luchnos_db` existe
-- Réexécutez le script SQL
-- Vérifiez les permissions MySQL
+- Réexécutez le script PostgreSQL
+- Vérifiez les permissions PostgreSQL
 
 ## 📝 Données de Test
 
@@ -334,7 +335,7 @@ Le script SQL inclut des données de test :
 ## 🔐 Sécurité
 
 ⚠️ **Important pour la production** :
-- Changez les mots de passe MySQL
+- Changez les mots de passe PostgreSQL
 - Utilisez des variables d'environnement sécurisées
 - Ajoutez une authentification pour les routes admin
 - Configurez CORS correctement
@@ -355,4 +356,3 @@ Pour toute question ou support :
 ---
 
 **Maranatha - Notre Seigneur vient! 🕯️**
-# luchnos
