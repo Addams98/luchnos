@@ -4,7 +4,7 @@ import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaCalendarAlt, FaArrowRight, FaBook, FaBible, FaLightbulb } from 'react-icons/fa';
-import { versetsAPI, penseesAPI } from '../services/api';
+import { versetsAPI, penseesAPI, BASE_URL } from '../services/api';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
@@ -51,7 +51,7 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
       badge: 'PAROLE DE DIEU',
       title: verset.texte,
       description: verset.reference,
-      image: `http://localhost:5000${verset.image_url}`,
+      image: `${BASE_URL}${verset.image_url}`,
       link: '/presentation'
     });
   });
@@ -65,7 +65,7 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
       badge: `PENSÉE DE LA ${pensee.type_periode === 'semaine' ? 'SEMAINE' : 'MOIS'}`,
       title: pensee.contenu,
       description: '',
-      image: `http://localhost:5000${pensee.image_url}`,
+      image: `${BASE_URL}${pensee.image_url}`,
       link: '/presentation'
     });
   });
@@ -92,7 +92,7 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
         }),
         time: event.heure_evenement || '',
         location: event.lieu || '',
-        image: `http://localhost:5000${event.image_url}`,
+        image: `${BASE_URL}${event.image_url}`,
         link: '/evenements'
       });
     });
@@ -114,7 +114,7 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
         author: livre.auteur,
         pages: livre.nombre_pages || '',
         category: livre.categorie || '',
-        image: `http://localhost:5000${livre.image_couverture}`,
+        image: `${BASE_URL}${livre.image_couverture}`,
         link: '/edition'
       });
     });

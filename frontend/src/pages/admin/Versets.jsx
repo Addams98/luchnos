@@ -13,7 +13,7 @@ import {
   FaArrowDown
 } from 'react-icons/fa';
 import AdminLayout from '../../components/AdminLayout';
-import { adminAPI, versetsAPI } from '../../services/api';
+import { adminAPI, versetsAPI, BASE_URL } from '../../services/api';
 
 const Versets = () => {
   const [versets, setVersets] = useState([]);
@@ -75,7 +75,7 @@ const Versets = () => {
       actif: verset.actif,
       ordre: verset.ordre
     });
-    setImagePreview(verset.image_url ? `http://localhost:5000${verset.image_url}` : '');
+    setImagePreview(verset.image_url ? `${BASE_URL}${verset.image_url}` : '');
     setShowModal(true);
   };
 
@@ -138,7 +138,7 @@ const Versets = () => {
       const response = await versetsAPI.uploadImage(formDataUpload);
       if (response.data.success) {
         setFormData({ ...formData, image_url: response.data.imageUrl });
-        setImagePreview(`http://localhost:5000${response.data.imageUrl}`);
+        setImagePreview(`${BASE_URL}${response.data.imageUrl}`);
       }
     } catch (error) {
       console.error('Erreur upload:', error);

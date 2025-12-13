@@ -74,7 +74,7 @@ const Livres = () => {
       const formData = new FormData();
       formData.append('image', file);
       
-      const response = await fetch('http://localhost:5000/api/livres/upload', {
+      const response = await fetch(`${BASE_URL}/api/livres/upload`, {
         method: 'POST',
         body: formData
       });
@@ -105,7 +105,7 @@ const Livres = () => {
       const formData = new FormData();
       formData.append('pdf', file);
       
-      const response = await fetch('http://localhost:5000/api/livres/upload-pdf', {
+      const response = await fetch(`${BASE_URL}/api/livres/upload-pdf`, {
         method: 'POST',
         body: formData
       });
@@ -177,7 +177,7 @@ const Livres = () => {
         image_couverture: livre.image_couverture || '',
         pdf_url: livre.pdf_url || ''
       });
-      setImagePreview(livre.image_couverture ? `http://localhost:5000${livre.image_couverture}` : '');
+      setImagePreview(livre.image_couverture ? `${BASE_URL}${livre.image_couverture}` : '');
       setPdfFileName(livre.pdf_url ? livre.pdf_url.split('/').pop() : '');
     } else {
       setEditingLivre(null);
@@ -267,7 +267,7 @@ const Livres = () => {
             <div className="h-48 bg-gradient-to-br from-copper to-copper-light flex items-center justify-center">
               {livre.image_couverture ? (
                 <img 
-                  src={`http://localhost:5000${livre.image_couverture}`}
+                  src={`${BASE_URL}${livre.image_couverture}`}
                   alt={livre.titre}
                   className="w-full h-full object-cover"
                 />

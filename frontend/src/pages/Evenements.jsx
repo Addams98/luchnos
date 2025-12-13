@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaSearch, FaImages } from 'react-icons/fa';
-import { evenementsAPI } from '../services/api';
+import { evenementsAPI, BASE_URL } from '../services/api';
 
 const Evenements = () => {
   const navigate = useNavigate();
@@ -200,7 +200,7 @@ const Evenements = () => {
                   <div className={`relative overflow-hidden h-48 event-image-3d ${event.statut === 'a_venir' ? 'upcoming' : ''}`}>
                     {event.image_url ? (
                       <img
-                        src={`http://localhost:5000${event.image_url}`}
+                        src={`${BASE_URL}${event.image_url}`}
                         alt={event.titre}
                         className="w-full h-full object-cover"
                       />

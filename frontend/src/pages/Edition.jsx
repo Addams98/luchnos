@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaBook, FaDownload, FaSearch, FaCheckCircle, FaFilter } from 'react-icons/fa';
-import { livresAPI } from '../services/api';
+import { livresAPI, BASE_URL } from '../services/api';
 
 const Edition = () => {
   const [livres, setLivres] = useState([]);
@@ -225,7 +225,7 @@ const Edition = () => {
                   <div className="relative overflow-hidden bg-gradient-primary p-4 book-cover-3d perspective-container">
                     {livre.image_couverture ? (
                       <img
-                        src={`http://localhost:5000${livre.image_couverture}`}
+                        src={`${BASE_URL}${livre.image_couverture}`}
                         alt={livre.titre}
                         className="w-full h-64 object-contain"
                       />
@@ -272,7 +272,7 @@ const Edition = () => {
                     {/* Bouton de téléchargement pour livres gratuits */}
                     {livre.gratuit && livre.pdf_url && livre.disponible_telechargement && (
                       <a
-                        href={`http://localhost:5000${livre.pdf_url}`}
+                        href={`${BASE_URL}${livre.pdf_url}`}
                         download
                         onClick={(e) => e.stopPropagation()}
                         className="w-full flex items-center justify-center gap-2 bg-gradient-gold text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:shadow-lg transition-all"
@@ -306,7 +306,7 @@ const Edition = () => {
               <div className="bg-gradient-primary p-8 rounded-xl flex items-center justify-center book-cover-3d perspective-container">
                 {selectedBook.image_couverture ? (
                   <img
-                    src={`http://localhost:5000${selectedBook.image_couverture}`}
+                    src={`${BASE_URL}${selectedBook.image_couverture}`}
                     alt={selectedBook.titre}
                     className="max-h-96 object-contain"
                   />
@@ -359,7 +359,7 @@ const Edition = () => {
                   {/* Bouton de téléchargement */}
                   {selectedBook.gratuit && selectedBook.pdf_url && selectedBook.disponible_telechargement && (
                     <a
-                      href={`http://localhost:5000${selectedBook.pdf_url}`}
+                      href={`${BASE_URL}${selectedBook.pdf_url}`}
                       download
                       className="w-full flex items-center justify-center gap-2 bg-gradient-gold text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all mb-6"
                     >

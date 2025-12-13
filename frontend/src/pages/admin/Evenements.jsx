@@ -69,7 +69,7 @@ const Evenements = () => {
       const formData = new FormData();
       formData.append('image', file);
       
-      const response = await fetch('http://localhost:5000/api/evenements/upload', {
+      const response = await fetch(`${BASE_URL}/api/evenements/upload`, {
         method: 'POST',
         body: formData
       });
@@ -138,7 +138,7 @@ const Evenements = () => {
         image_url: event.image_url || '',
         actif: event.actif !== undefined ? event.actif : true
       });
-      setImagePreview(event.image_url ? `http://localhost:5000${event.image_url}` : '');
+      setImagePreview(event.image_url ? `${BASE_URL}${event.image_url}` : '');
     } else {
       setEditingEvent(null);
       setFormData({

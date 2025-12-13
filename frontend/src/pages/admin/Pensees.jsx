@@ -15,7 +15,7 @@ import {
   FaClock
 } from 'react-icons/fa';
 import AdminLayout from '../../components/AdminLayout';
-import { adminAPI, penseesAPI } from '../../services/api';
+import { adminAPI, penseesAPI, BASE_URL } from '../../services/api';
 
 const Pensees = () => {
   const [pensees, setPensees] = useState([]);
@@ -83,7 +83,7 @@ const Pensees = () => {
       actif: pensee.actif,
       ordre: pensee.ordre
     });
-    setImagePreview(pensee.image_url ? `http://localhost:5000${pensee.image_url}` : '');
+    setImagePreview(pensee.image_url ? `${BASE_URL}${pensee.image_url}` : '');
     setShowModal(true);
   };
 
@@ -146,7 +146,7 @@ const Pensees = () => {
       const response = await penseesAPI.uploadImage(formDataUpload);
       if (response.data.success) {
         setFormData({ ...formData, image_url: response.data.imageUrl });
-        setImagePreview(`http://localhost:5000${response.data.imageUrl}`);
+        setImagePreview(`${BASE_URL}${response.data.imageUrl}`);
       }
     } catch (error) {
       console.error('Erreur upload:', error);
