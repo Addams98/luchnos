@@ -9,32 +9,28 @@ const Presentation = () => {
       title: "MISSIONS",
       verse: "Romains 15:20",
       icon: FaBullhorn,
-      color: "bg-gold",
-      link: "/missions-formations#missions"
+      color: "bg-gold"
     },
     {
       number: "2",
       title: "FORMATIONS BIBLIQUES",
       verse: "Éphésiens 4:11-14",
       icon: FaBible,
-      color: "bg-copper",
-      link: "/missions-formations#formations"
+      color: "bg-copper"
     },
     {
       number: "3",
       title: "EDITION PLUMAGE",
       verse: "Jérémie 30:2",
       icon: FaBook,
-      color: "bg-primary",
-      link: "/edition"
+      color: "bg-primary"
     },
     {
       number: "4",
       title: "LUCHNOS HÉRITAGE",
       verse: "Proverbes 22:6",
       icon: FaChild,
-      color: "bg-red-500",
-      link: "/missions-formations#heritage"
+      color: "bg-red-500"
     }
   ];
 
@@ -137,22 +133,20 @@ const Presentation = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="card p-6 text-center group hover:shadow-xl transition-all duration-300"
+                  className="card p-6 text-center"
                 >
-                  <Link to={comp.link} className="block">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 ${comp.color} rounded-full mb-4 group-hover:scale-110 transition-transform`}>
-                      <IconComponent className="text-white text-2xl" />
-                    </div>
-                    <div className="text-4xl font-bold text-gold mb-2">
-                      {comp.number}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-2">
-                      {comp.title}
-                    </h3>
-                    <p className="text-sm text-copper italic">
-                      {comp.verse}
-                    </p>
-                  </Link>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 ${comp.color} rounded-full mb-4`}>
+                    <IconComponent className="text-white text-2xl" />
+                  </div>
+                  <div className="text-4xl font-bold text-gold mb-2">
+                    {comp.number}
+                  </div>
+                  <h3 className="text-xl font-bold text-primary mb-2">
+                    {comp.title}
+                  </h3>
+                  <p className="text-sm text-copper italic">
+                    {comp.verse}
+                  </p>
                 </motion.div>
               );
             })}
