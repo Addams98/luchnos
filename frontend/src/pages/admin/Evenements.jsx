@@ -12,7 +12,7 @@ import {
   FaTimesCircle
 } from 'react-icons/fa';
 import AdminLayout from '../../components/AdminLayout';
-import { evenementsAPI, adminAPI } from '../../services/api';
+import { evenementsAPI, adminAPI, BASE_URL } from '../../services/api';
 
 const Evenements = () => {
   const [evenements, setEvenements] = useState([]);

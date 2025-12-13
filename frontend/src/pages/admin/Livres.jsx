@@ -13,7 +13,7 @@ import {
   FaTimesCircle
 } from 'react-icons/fa';
 import AdminLayout from '../../components/AdminLayout';
-import { livresAPI, adminAPI } from '../../services/api';
+import { livresAPI, adminAPI, BASE_URL } from '../../services/api';
 
 const Livres = () => {
   const [livres, setLivres] = useState([]);
