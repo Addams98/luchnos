@@ -175,7 +175,7 @@ const Footer = () => {
               Votre soutien permet de faire avancer l'oeuvre du Père céleste. Il ne s'agit pas de semer pour un Homme ou un groupe de personne, mais pour l'avancement du Royaume.
             </p>
             <div className="flex flex-col space-y-2">
-              <Link to="/contact" className="btn-primary inline-block text-sm text-center">
+              <Link to="/dons" className="btn-primary inline-block text-sm text-center">
                 Faire un Don
               </Link>
             </div>

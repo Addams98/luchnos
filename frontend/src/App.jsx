@@ -9,6 +9,7 @@ import Edition from './pages/Edition';
 import Evenements from './pages/Evenements';
 import EvenementDetails from './pages/EvenementDetails';
 import Contact from './pages/Contact';
+import Dons from './pages/Dons';
 import ScrollToTop from './components/ScrollToTop';
 import ProtectedRoute from './components/ProtectedRoute';
 import './styles/3d-effects.css';
@@ -43,6 +44,15 @@ function App() {
             <Header />
             <main className="flex-grow">
               <Presentation />
+            </main>
+            <Footer />
+          </div>
+        } />
+        <Route path="/dons" element={
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-grow">
+              <Dons />
             </main>
             <Footer />
           </div>
