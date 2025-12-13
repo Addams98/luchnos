@@ -199,25 +199,6 @@ const EvenementDetails = () => {
                 </p>
               </div>
             </div>
-
-            {/* Bouton d'action */}
-            {evenement.statut === 'a_venir' && (
-              <div className="border-t border-slate-200 pt-8">
-                <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-primary mb-2">
-                      Participer à cet événement
-                    </h3>
-                    <p className="text-slate-600">
-                      Inscrivez-vous dès maintenant pour réserver votre place
-                    </p>
-                  </div>
-                  <button className="btn-primary whitespace-nowrap px-8 py-4 text-lg">
-                    S'inscrire maintenant
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </motion.div>
       </div>
