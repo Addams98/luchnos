@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://luchnos-frontend.onrender.com', 'https://luchnos.onrender.com']
-    : ['http://localhost:3000', 'http://localhost:5173'],
+    ? ['https://luchnos-frontend.onrender.com', 'https://luchnos-frontend-web.onrender.com', 'https://luchnos.onrender.com']
+    : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:3001'],
   credentials: true
 }));
 app.use(bodyParser.json());
