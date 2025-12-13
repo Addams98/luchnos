@@ -35,7 +35,7 @@ const MissionsFormations = () => {
       title: "Mission évangélique",
       description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
       icon: FaBullhorn,
-      color: "bg-primary",
+      color: "bg-white",
       iconColor: "text-red-500"
     },
     {
