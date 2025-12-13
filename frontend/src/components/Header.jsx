@@ -23,6 +23,7 @@ const Header = () => {
     { name: 'Multimédia', path: '/multimedia' },
     { name: 'Édition Plumage', path: '/edition' },
     { name: 'Événements', path: '/evenements' },
+    { name: 'Nous Soutenir', path: '/dons' },
     { name: 'Contact', path: '/contact' },
   ];
 
