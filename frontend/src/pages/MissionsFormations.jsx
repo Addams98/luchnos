@@ -1,7 +1,35 @@
 import { motion } from 'framer-motion';
 import { FaBullhorn, FaUsers, FaHandHoldingHeart, FaBible, FaFire, FaBookOpen, FaGraduationCap, FaChild } from 'react-icons/fa';
+import { useEffect } from 'react';
 
 const MissionsFormations = () => {
+  // Gérer le scroll vers une section spécifique si présent dans l'URL
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Hauteur du header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const missionsData = [
     {
       title: "Mission évangélique",
@@ -100,8 +128,40 @@ const MissionsFormations = () => {
         </motion.div>
       </section>
 
+      {/* Menu de navigation flottant */}
+      <div className="sticky top-24 z-30 bg-white/95 backdrop-blur-sm shadow-md py-4 mb-8">
+        <div className="container-custom">
+          <div className="flex flex-wrap justify-center gap-3">
+            <button
+              onClick={() => scrollToSection('missions')}
+              className="px-4 py-2 bg-gold text-white rounded-lg hover:bg-gold/90 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
+            >
+              <span className="font-bold">1</span> Missions
+            </button>
+            <button
+              onClick={() => scrollToSection('formations')}
+              className="px-4 py-2 bg-copper text-white rounded-lg hover:bg-copper/90 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
+            >
+              <span className="font-bold">2</span> Formations
+            </button>
+            <button
+              onClick={() => scrollToSection('edition')}
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
+            >
+              <span className="font-bold">3</span> Édition Plumage
+            </button>
+            <button
+              onClick={() => scrollToSection('heritage')}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
+            >
+              <span className="font-bold">4</span> Luchnos Héritage
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* 1. MISSIONS */}
-      <section className="py-20 bg-white">
+      <section id="missions" className="py-20 bg-white scroll-mt-32">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -146,7 +206,7 @@ const MissionsFormations = () => {
       </section>
 
       {/* 2. FORMATIONS BIBLIQUES */}
-      <section className="py-20 bg-slate-light">
+      <section id="formations" className="py-20 bg-slate-light scroll-mt-32">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -191,7 +251,7 @@ const MissionsFormations = () => {
       </section>
 
       {/* 3. EDITION PLUMAGE */}
-      <section className="py-20 bg-white">
+      <section id="edition" className="py-20 bg-white scroll-mt-32">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -222,7 +282,7 @@ const MissionsFormations = () => {
       </section>
 
       {/* 4. LUCHNOS HÉRITAGE */}
-      <section className="py-20 bg-gradient-primary text-white">
+      <section id="heritage" className="py-20 bg-gradient-primary text-white scroll-mt-32">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

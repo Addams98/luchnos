@@ -146,12 +146,15 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
             navigation={true}
             loop={true}
             className="h-full"
+            fadeEffect={{
+              crossFade: true
+            }}
           >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <div className="relative h-full">
+          <SwiperSlide key={index} className="swiper-slide-custom">
+            <div className="relative h-full w-full">
               {/* Image de fond avec overlay sombre */}
-              <div className="absolute inset-0">
+              <div className="absolute inset-0 z-0">
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
@@ -162,7 +165,7 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
               </div>
 
               {/* Contenu aligné à GAUCHE */}
-              <div className="relative h-full flex items-center">
+              <div className="relative h-full flex items-center z-10">
                 <div className="container-custom pl-8 md:pl-12 lg:pl-16">
                   <div className="max-w-2xl">
                     <motion.div

@@ -10,7 +10,7 @@ const Presentation = () => {
       verse: "Romains 15:20",
       icon: FaBullhorn,
       color: "bg-gold",
-      link: "/missions-formations"
+      link: "/missions-formations#missions"
     },
     {
       number: "2",
@@ -18,7 +18,7 @@ const Presentation = () => {
       verse: "Éphésiens 4:11-14",
       icon: FaBible,
       color: "bg-copper",
-      link: "/missions-formations"
+      link: "/missions-formations#formations"
     },
     {
       number: "3",
@@ -34,7 +34,7 @@ const Presentation = () => {
       verse: "Proverbes 22:6",
       icon: FaChild,
       color: "bg-red-500",
-      link: "/missions-formations"
+      link: "/missions-formations#heritage"
     }
   ];
 
@@ -89,7 +89,7 @@ const Presentation = () => {
               "Rallumer et éclairer les saints en vue de la préparation au retour de l'Epoux.",
               "Former et équiper les disciples et les aspirants au service.",
               "Évangéliser les âmes.",
-              "Encourager les chrétiens au travers des oeuvres écrites.",
+              "Encourager les chrétiens au travers des œuvres écrites.",
               "Encourager les femmes à revenir à leur identité en Yéhoshoua.",
               "Préparer la relève et instruire la jeunesse selon les voies du Seigneur."
             ].map((mission, index) => (
@@ -245,22 +245,22 @@ const Presentation = () => {
             {[
               {
                 title: "Formation et équipement",
-                description: "Adressés aux personnes converties et les aspirants au service",
+                description: "Adressé aux personnes converties et les aspirants au service",
                 icon: FaBible
               },
               {
                 title: "Formation des Kephale",
-                description: "Adressés aux hommes (époux, fiancé et aspirant)",
+                description: "Adressé aux hommes (époux, fiancé et aspirant)",
                 icon: FaUsers
               },
               {
                 title: "Formation Khayil/Ezer",
-                description: "Adressées à toutes les catégories de femme",
+                description: "Adressée à toutes les catégories de femme",
                 icon: FaUsers
               },
               {
                 title: "Formation Tsaphah",
-                description: "Adressés aux sentinelles",
+                description: "Adressée aux sentinelles",
                 icon: FaFire
               }
             ].map((formation, index) => {

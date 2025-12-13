@@ -172,7 +172,7 @@ const Footer = () => {
           <div>
             <h3 className="text-gold font-bold text-lg mb-4">Nous Soutenir</h3>
             <p className="text-slate-300 text-sm mb-4 leading-relaxed">
-              Votre soutien permet de faire avancer l'oeuvre du Père celeste. Il ne s'agit pas de sémer pour un Homme ou un groupe de personne, mais pour l'avancement du Royaume.
+              Votre soutien permet de faire avancer l'oeuvre du Père céleste. Il ne s'agit pas de semer pour un Homme ou un groupe de personne, mais pour l'avancement du Royaume.
             </p>
             <div className="flex flex-col space-y-2">
               <Link to="/contact" className="btn-primary inline-block text-sm text-center">

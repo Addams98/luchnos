@@ -159,7 +159,7 @@ const QuiSommesNous = () => {
                 </div>
                 <p className="text-slate-700 leading-relaxed">
                   Par la suite, j'ai rencontré celle qui est devenue mon épouse, et le Seigneur me dira qu'Il nous mettait ensemble pour faire son œuvre. 
-                  Pendant que nous avancions, Il nous montra une vision : des vases d'huiles qui allumaient des lampes partout dans les nations.
+                  Pendant que nous avancions, Il nous montra une vision : des vases d'huile qui allumaient des lampes partout dans les nations.
                 </p>
               </motion.div>
 
@@ -180,7 +180,7 @@ const QuiSommesNous = () => {
                   </div>
                 </div>
                 <p className="text-slate-700 leading-relaxed">
-                  Des années plus tard,j'eus une autre visitation divine dans laquelle le Seigneur m'imposa les mains et m'envoyait accomplir l'œuvre pour laquelle il nous avait appelé : 
+                  Des années plus tard, j'eus une autre visitation divine dans laquelle le Seigneur m'imposa les mains et m'envoyait accomplir l'œuvre pour laquelle il nous avait appelé : 
                   rallumer, éclairer, encourager et équiper les saints en vue de la préparation à son retour et de reponde à son appel.
                 </p>
               </motion.div>
@@ -223,7 +223,7 @@ const QuiSommesNous = () => {
                 
                 <p className="text-xl md:text-2xl leading-relaxed mb-4">
                   « Nous bénissons le Seigneur pour ce qu'il accomplit depuis toutes ces années. 
-                  Nous restons convaincus que nous n'avons encore rien vu d'après les promesses qu'il nous a faites. »
+                  Nous restons convaincus que nous n'avons encore rien vu au regard des promesses qu'il nous a faites. »
                 </p>
                 <p className="text-2xl md:text-3xl font-bold text-gold">
                   À Yéhoshoua seul toute la gloire !
