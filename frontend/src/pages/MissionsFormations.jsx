@@ -36,14 +36,14 @@ const MissionsFormations = () => {
       description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
       icon: FaMicrophone,
       color: "bg-gold",
-      iconColor: "text-primary"
+      iconColor: "text-gray-900"
     },
     {
       title: "Mission Filles2SaraY",
       description: "Restaurer l'identité de la Femme (Sous la tente de Sarah et les programmes divers)",
       icon: FaUsers,
       color: "bg-gold",
-      iconColor: "text-primary"
+      iconColor: "text-gray-900"
     },
     {
       title: "Mission sociale",
@@ -197,7 +197,7 @@ const MissionsFormations = () => {
                   className="card p-8 text-center"
                 >
                   <div className={`inline-flex items-center justify-center w-16 h-16 ${mission.color} rounded-full mb-6 shadow-lg`}>
-                    {IconComponent && <IconComponent className={`${mission.iconColor} text-3xl`} />}
+                    {IconComponent && <IconComponent className={`${mission.iconColor} text-4xl`} />}
                   </div>
                   <h3 className="text-xl font-bold text-primary mb-4">
                     {mission.title}
