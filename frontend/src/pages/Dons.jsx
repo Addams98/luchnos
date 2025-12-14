@@ -19,6 +19,13 @@ const Dons = () => {
       color: "bg-orange-600"
     },
     {
+      icon: FaMoneyBillWave,
+      nom: "PayPal",
+      info: "fillesdesaray@gmail.com",
+      description: "Paiement en ligne via PayPal",
+      color: "bg-blue-600"
+    },
+    {
       icon: FaPhone,
       nom: "Moov Money (Libertis)",
       info: "+241 62 50 29 10",
