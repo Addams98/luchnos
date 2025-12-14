@@ -68,5 +68,58 @@ router.get('/liens-sociaux', async (req, res) => {
   }
 });
 
+/**
+ * @route   POST /api/parametres/init-emergency
+ * @desc    Endpoint d'urgence pour initialiser la table parametres_site
+ * @access  Public (TEMPORAIRE - À SUPPRIMER APRÈS UTILISATION)
+ */
+router.post('/init-emergency', async (req, res) => {
+  try {
+    console.log('🔧 Initialisation d\'urgence de parametres_site...');
+    
+    // Créer la table
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS parametres_site (
+        id SERIAL PRIMARY KEY,
+        cle VARCHAR(100) UNIQUE NOT NULL,
+        valeur TEXT,
+        description TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    
+    // Insérer les paramètres par défaut
+    const defaultParams = [
+      ['facebook_url', 'https://www.facebook.com/profile.php?id=100071922544535&mibextid=ZbWKwL', 'URL Facebook'],
+      ['youtube_url', 'https://youtube.com/@luchnoslampeallumee?si=P7dIHkQ-0sQNR-lx', 'URL YouTube'],
+      ['instagram_url', 'https://instagram.com/filles2saray_nouvelle_identite?igshid=NTc4MTIwNjQ2YQ==', 'URL Instagram'],
+      ['whatsapp_url', 'https://whatsapp.com/channel/0029Va9yD32DJ6H299QykwOt', 'URL WhatsApp'],
+      ['youtube_channel_id', 'UCdLtLS7wVnyhAKQl3yfx5XQ', 'ID YouTube Channel']
+    ];
+    
+    for (const [cle, valeur, description] of defaultParams) {
+      await db.query(
+        'INSERT INTO parametres_site (cle, valeur, description) VALUES ($1, $2, $3) ON CONFLICT (cle) DO NOTHING',
+        [cle, valeur, description]
+      );
+    }
+    
+    console.log('✅ Table initialisée');
+    
+    res.json({
+      success: true,
+      message: 'Table parametres_site initialisée avec succès'
+    });
+  } catch (error) {
+    console.error('❌ Erreur init:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de l\'initialisation',
+      error: error.message
+    });
+  }
+});
+
 module.exports = router;
 
