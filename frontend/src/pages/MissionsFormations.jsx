@@ -36,7 +36,7 @@ const MissionsFormations = () => {
       description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
       icon: FaBullhorn,
       color: "bg-gold",
-      iconColor: "text-red-600"
+      iconColor: "text-red-700"
     },
     {
       title: "Mission Filles2SaraY",
@@ -197,7 +197,7 @@ const MissionsFormations = () => {
                   className="card p-8 text-center"
                 >
                   <div className={`inline-flex items-center justify-center w-16 h-16 ${mission.color} rounded-full mb-6 shadow-lg`}>
-                    <IconComponent className={`${mission.iconColor} text-4xl`} />
+                    <IconComponent className={`${mission.iconColor} text-5xl`} />
                   </div>
                   <h3 className="text-xl font-bold text-primary mb-4">
                     {mission.title}
