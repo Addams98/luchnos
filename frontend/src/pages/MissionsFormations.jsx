@@ -197,7 +197,7 @@ const MissionsFormations = () => {
                   className="card p-8 text-center"
                 >
                   <div className={`inline-flex items-center justify-center w-16 h-16 ${mission.color} rounded-full mb-6 shadow-lg`}>
-                    <IconComponent className={`${mission.iconColor} text-5xl`} />
+                    {IconComponent && <IconComponent className={`${mission.iconColor} text-3xl`} />}
                   </div>
                   <h3 className="text-xl font-bold text-primary mb-4">
                     {mission.title}
