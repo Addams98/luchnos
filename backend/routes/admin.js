@@ -290,21 +290,24 @@ router.get('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
 router.put('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
   try {
     console.log('📝 Mise à jour des paramètres...');
-    console.log('Body:', req.body);
+    console.log('Body reçu:', JSON.stringify(req.body, null, 2));
     
     const { parametres } = req.body;
 
     if (!parametres || !Array.isArray(parametres)) {
-      console.log('❌ Format invalide:', parametres);
+      console.log('❌ Format invalide - Type:', typeof parametres);
+      console.log('❌ Contenu:', parametres);
       return res.status(400).json({
         success: false,
-        message: 'Format de données invalide'
+        message: 'Format de données invalide - array attendu'
       });
     }
 
-    // Vérifier si la table existe
+    console.log(`📊 Nombre de paramètres à mettre à jour: ${parametres.length}`);
+
+    // Créer la table si elle n'existe pas
     try {
-      // Créer la table si elle n'existe pas
+      console.log('🔧 Création de la table parametres_site si nécessaire...');
       await db.query(`
         CREATE TABLE IF NOT EXISTS parametres_site (
           id SERIAL PRIMARY KEY,
@@ -315,46 +318,53 @@ router.put('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
       `);
+      console.log('✅ Table créée ou existe déjà');
       
-      // Mettre à jour chaque paramètre
-      for (const param of parametres) {
+    } catch (createError) {
+      console.error('❌ Erreur création table:', createError.message);
+      throw createError;
+    }
+    
+    // Mettre à jour chaque paramètre
+    let successCount = 0;
+    for (const param of parametres) {
+      try {
         const { cle, valeur } = param;
-        console.log(`Mise à jour: ${cle} = ${valeur}`);
+        console.log(`⏳ Mise à jour: ${cle} = "${valeur}"`);
         
-        // Utiliser UPSERT (INSERT ... ON CONFLICT)
-        await db.query(`
+        const result = await db.query(`
           INSERT INTO parametres_site (cle, valeur, description, updated_at) 
           VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
           ON CONFLICT (cle) 
           DO UPDATE SET valeur = $2, updated_at = CURRENT_TIMESTAMP
+          RETURNING *
         `, [cle, valeur, param.description || '']);
+        
+        console.log(`✅ ${cle} sauvegardé - ID: ${result.rows[0].id}`);
+        successCount++;
+        
+      } catch (paramError) {
+        console.error(`❌ Erreur pour ${param.cle}:`, paramError.message);
+        throw paramError;
       }
-
-      console.log('✅ Paramètres mis à jour dans la DB');
-      
-      return res.json({
-        success: true,
-        message: 'Paramètres mis à jour avec succès'
-      });
-      
-    } catch (dbError) {
-      console.log('⚠️ Impossible de sauvegarder en DB:', dbError.message);
-      // Même si la sauvegarde échoue, on retourne un succès
-      // car les paramètres sont utilisables depuis le frontend
-      return res.json({
-        success: true,
-        message: 'Paramètres enregistrés (mode lecture seule)',
-        warning: 'Les modifications ne seront pas persistées'
-      });
     }
+
+    console.log(`✅ ${successCount}/${parametres.length} paramètres sauvegardés`);
+    
+    return res.json({
+      success: true,
+      message: `${successCount} paramètre(s) mis à jour avec succès`
+    });
     
   } catch (error) {
     console.error('❌ Erreur update paramètres:', error);
+    console.error('Détails:', error.message);
     console.error('Stack:', error.stack);
     res.status(500).json({
       success: false,
       message: 'Erreur lors de la mise à jour des paramètres',
-      error: error.message
+      error: error.message,
+      details: error.stack
     });
   }
 });
