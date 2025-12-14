@@ -141,7 +141,7 @@ const Login = () => {
         {/* Info */}
         <div className="mt-6 text-center text-sm text-slate">
           <p>Compte par défaut :</p>
-          <p className="font-mono text-xs mt-1">admin@luchnos.com / Admin@123</p>
+          <p className="font-mono text-xs mt-1">admin@luchnos.com / Luchnos@2025</p>
           <p className="text-xs mt-2 text-copper">À modifier après la première connexion</p>
         </div>
       </motion.div>
