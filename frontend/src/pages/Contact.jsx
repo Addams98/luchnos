@@ -218,8 +218,11 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-primary mb-1">Email</h4>
-                      <a href="mailto:contact@luchnos.org" className="text-slate-600 hover:text-gold transition-colors">
+                      <a href="mailto:Luchnos2020@gmail.com" className="text-slate-600 hover:text-gold transition-colors block">
                         Luchnos2020@gmail.com
+                      </a>
+                      <a href="mailto:fillesdesaray@gmail.com" className="text-slate-600 hover:text-gold transition-colors block">
+                        fillesdesaray@gmail.com
                       </a>
                     </div>
                   </div>
@@ -232,7 +235,7 @@ const Contact = () => {
                       <h4 className="font-semibold text-primary mb-1">Telephone</h4>
                       <p className="text-slate-600">
                         ‎+241 62562910<br />
-                       
+                        +27 78 722 0419
                       </p>
                     </div>
                   </div>
