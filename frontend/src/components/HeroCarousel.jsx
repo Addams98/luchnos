@@ -42,30 +42,29 @@ const HeroCarousel = ({ evenements = [], livres = [] }) => {
     }
   };
 
+  // Image par défaut pour versets et pensées
+  const defaultBibleImage = '/assets/bible-default.jpg';
+
   // Ajouter les versets bibliques en premier
   versets.forEach(verset => {
-    if (!verset.image_url) return; // Ignorer si pas d'image
-    
     slides.push({
       type: 'verset',
       badge: 'PAROLE DE DIEU',
       title: verset.texte,
       description: verset.reference,
-      image: `${BASE_URL}${verset.image_url}`,
+      image: verset.image_url ? `${BASE_URL}${verset.image_url}` : defaultBibleImage,
       link: '/presentation'
     });
   });
 
   // Ajouter les pensées
   pensees.forEach(pensee => {
-    if (!pensee.image_url) return; // Ignorer si pas d'image
-    
     slides.push({
       type: 'pensee',
       badge: `PENSÉE DE LA ${pensee.type_periode === 'semaine' ? 'SEMAINE' : 'MOIS'}`,
       title: pensee.contenu,
       description: '',
-      image: `${BASE_URL}${pensee.image_url}`,
+      image: pensee.image_url ? `${BASE_URL}${pensee.image_url}` : defaultBibleImage,
       link: '/presentation'
     });
   });
