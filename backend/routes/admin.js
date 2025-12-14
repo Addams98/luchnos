@@ -239,15 +239,45 @@ router.get('/stats', authMiddleware, editorOrAdmin, async (req, res) => {
  */
 router.get('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
   try {
+    console.log('📋 Récupération des paramètres...');
+    
+    // Vérifier si la table existe
+    const tableCheck = await db.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_name = 'parametres_site'
+      );
+    `);
+    
+    console.log('Table parametres_site existe:', tableCheck.rows[0].exists);
+    
+    if (!tableCheck.rows[0].exists) {
+      // Créer la table si elle n'existe pas
+      await db.query(`
+        CREATE TABLE IF NOT EXISTS parametres_site (
+          id SERIAL PRIMARY KEY,
+          cle VARCHAR(100) UNIQUE NOT NULL,
+          valeur TEXT,
+          description TEXT,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+      console.log('✅ Table parametres_site créée');
+    }
+    
     const parametres_result = await db.query('SELECT * FROM parametres_site ORDER BY cle');
     const parametres = parametres_result.rows;
+    
+    console.log('✅ Paramètres récupérés:', parametres.length);
 
     res.json({
       success: true,
       data: parametres
     });
   } catch (error) {
-    console.error('Erreur paramètres:', error);
+    console.error('❌ Erreur paramètres:', error);
+    console.error('Stack:', error.stack);
     res.status(500).json({
       success: false,
       message: 'Erreur lors de la récupération des paramètres',
@@ -263,9 +293,13 @@ router.get('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
  */
 router.put('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
   try {
+    console.log('📝 Mise à jour des paramètres...');
+    console.log('Body:', req.body);
+    
     const { parametres } = req.body;
 
     if (!parametres || !Array.isArray(parametres)) {
+      console.log('❌ Format invalide:', parametres);
       return res.status(400).json({
         success: false,
         message: 'Format de données invalide'
@@ -275,6 +309,7 @@ router.put('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
     // Mettre à jour chaque paramètre
     for (const param of parametres) {
       const { cle, valeur } = param;
+      console.log(`Mise à jour: ${cle} = ${valeur}`);
       
       // Vérifier si le paramètre existe, sinon l'insérer
       const existingParam = await db.query(
@@ -284,7 +319,7 @@ router.put('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
 
       if (existingParam.rows.length > 0) {
         await db.query(
-          'UPDATE parametres_site SET valeur = $1 WHERE cle = $2',
+          'UPDATE parametres_site SET valeur = $1, updated_at = CURRENT_TIMESTAMP WHERE cle = $2',
           [valeur, cle]
         );
       } else {
@@ -295,12 +330,15 @@ router.put('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
       }
     }
 
+    console.log('✅ Paramètres mis à jour');
+    
     res.json({
       success: true,
       message: 'Paramètres mis à jour avec succès'
     });
   } catch (error) {
-    console.error('Erreur update paramètres:', error);
+    console.error('❌ Erreur update paramètres:', error);
+    console.error('Stack:', error.stack);
     res.status(500).json({
       success: false,
       message: 'Erreur lors de la mise à jour des paramètres',
