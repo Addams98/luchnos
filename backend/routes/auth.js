@@ -374,46 +374,5 @@ router.delete('/users/:id', authMiddleware, adminOnly, async (req, res) => {
   }
 });
 
-/**
- * @route   POST /api/auth/reset-admin-emergency
- * @desc    Endpoint temporaire pour réinitialiser le mot de passe admin
- * @access  Public (TEMPORAIRE - À SUPPRIMER APRÈS UTILISATION)
- */
-router.post('/reset-admin-emergency', async (req, res) => {
-  try {
-    const newPassword = 'Luchnos@2025';
-    const hash = bcrypt.hashSync(newPassword, 10);
-    
-    const result = await db.query(
-      'UPDATE utilisateurs SET password = $1 WHERE email = $2 RETURNING id, nom, email, role',
-      [hash, 'admin@luchnos.com']
-    );
-    
-    if (result.rows.length > 0) {
-      return res.json({
-        success: true,
-        message: 'Mot de passe admin réinitialisé',
-        user: {
-          email: result.rows[0].email,
-          nom: result.rows[0].nom,
-          role: result.rows[0].role
-        }
-      });
-    } else {
-      return res.status(404).json({
-        success: false,
-        message: 'Utilisateur admin non trouvé'
-      });
-    }
-  } catch (error) {
-    console.error('Erreur reset admin:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Erreur lors de la réinitialisation',
-      error: error.message
-    });
-  }
-});
-
 module.exports = router;
 
