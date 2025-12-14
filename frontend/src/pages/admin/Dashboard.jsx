@@ -78,22 +78,7 @@ const Dashboard = () => {
       color: 'bg-primary-light',
       subtext: `${stats?.stats?.messages_non_lus || 0} non lus`,
       alert: stats?.stats?.messages_non_lus > 0
-    },
-    {
-      title: 'Newsletter',
-      value: stats?.stats?.total_newsletter || 0,
-      icon: FaUsers,
-      color: 'bg-green-500',
-      subtext: 'Abonnés actifs'
-    },
-    {
-      title: 'Témoignages',
-      value: stats?.stats?.total_temoignages || 0,
-      icon: FaComments,
-      color: 'bg-gold',
-      subtext: `${stats?.stats?.temoignages_en_attente || 0} en attente`,
-      alert: stats?.stats?.temoignages_en_attente > 0
-    },
+    }
   ];
 
   return (

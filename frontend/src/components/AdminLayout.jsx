@@ -15,21 +15,43 @@ import {
   FaTimes,
   FaUser,
   FaBible,
-  FaLightbulb
+  FaLightbulb,
+  FaBell
 } from 'react-icons/fa';
+import { adminAPI } from '../services/api';
 
 const AdminLayout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [user, setUser] = useState(null);
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   useEffect(() => {
     const userData = localStorage.getItem('luchnos_user');
     if (userData) {
       setUser(JSON.parse(userData));
     }
+    
+    // Charger le nombre de messages non lus
+    loadUnreadMessages();
+    
+    // Actualiser toutes les 30 secondes
+    const interval = setInterval(loadUnreadMessages, 30000);
+    
+    return () => clearInterval(interval);
   }, []);
+
+  const loadUnreadMessages = async () => {
+    try {
+      const response = await adminAPI.getStats();
+      if (response.data.success) {
+        setUnreadMessages(response.data.data.stats.messages_non_lus || 0);
+      }
+    } catch (error) {
+      console.error('Erreur chargement messages non lus:', error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('luchnos_token');
@@ -96,12 +118,13 @@ const AdminLayout = ({ children }) => {
                 
                 const isActive = location.pathname === item.path;
                 const Icon = item.icon;
+                const showBadge = item.path === '/admin/messages' && unreadMessages > 0;
 
                 return (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all relative ${
                       isActive
                         ? 'bg-gold text-primary shadow-glow'
                         : 'text-white hover:bg-white/10'
@@ -109,6 +132,11 @@ const AdminLayout = ({ children }) => {
                   >
                     <Icon className={isActive ? 'text-primary' : item.color} />
                     <span className="font-medium">{item.label}</span>
+                    {showBadge && (
+                      <span className="ml-auto bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 min-w-[24px] text-center animate-pulse">
+                        {unreadMessages}
+                      </span>
+                    )}
                   </Link>
                 );
               })}
@@ -141,6 +169,19 @@ const AdminLayout = ({ children }) => {
             </button>
 
             <div className="flex items-center gap-4">
+              {/* Notification Messages */}
+              <Link
+                to="/admin/messages"
+                className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <FaBell size={20} className="text-slate" />
+                {unreadMessages > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                    {unreadMessages}
+                  </span>
+                )}
+              </Link>
+
               <div className="text-right">
                 <p className="text-sm text-slate">Bienvenue,</p>
                 <p className="font-semibold text-primary">{user?.nom}</p>
