@@ -193,8 +193,8 @@ const MissionsFormations = () => {
               viewport={{ once: true }}
               className="card p-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-6 shadow-lg">
-                <FaMicrophone className="text-gray-900 text-4xl" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
+                <FaMicrophone className="text-gold text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission évangélique
@@ -212,8 +212,8 @@ const MissionsFormations = () => {
               viewport={{ once: true }}
               className="card p-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-6 shadow-lg">
-                <FaUsers className="text-gray-900 text-4xl" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
+                <FaUsers className="text-gold text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission Filles2SaraY
@@ -231,8 +231,8 @@ const MissionsFormations = () => {
               viewport={{ once: true }}
               className="card p-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-copper rounded-full mb-6 shadow-lg">
-                <FaHandHoldingHeart className="text-white text-4xl" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
+                <FaHandHoldingHeart className="text-gold text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission sociale
