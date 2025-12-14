@@ -241,40 +241,36 @@ router.get('/parametres', authMiddleware, editorOrAdmin, async (req, res) => {
   try {
     console.log('📋 Récupération des paramètres...');
     
-    // Vérifier si la table existe
-    const tableCheck = await db.query(`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_name = 'parametres_site'
-      );
-    `);
+    // Retourner des paramètres par défaut directement depuis la mémoire
+    // au lieu de dépendre de la base de données
+    const defaultParametres = [
+      { id: 1, cle: 'facebook_url', valeur: 'https://www.facebook.com/profile.php?id=100071922544535&mibextid=ZbWKwL', description: 'URL Facebook' },
+      { id: 2, cle: 'youtube_url', valeur: 'https://youtube.com/@luchnoslampeallumee?si=P7dIHkQ-0sQNR-lx', description: 'URL YouTube' },
+      { id: 3, cle: 'instagram_url', valeur: 'https://instagram.com/filles2saray_nouvelle_identite?igshid=NTc4MTIwNjQ2YQ==', description: 'URL Instagram' },
+      { id: 4, cle: 'whatsapp_url', valeur: 'https://whatsapp.com/channel/0029Va9yD32DJ6H299QykwOt', description: 'URL WhatsApp' },
+      { id: 5, cle: 'youtube_channel_id', valeur: 'UCdLtLS7wVnyhAKQl3yfx5XQ', description: 'ID YouTube Channel' }
+    ];
     
-    console.log('Table parametres_site existe:', tableCheck.rows[0].exists);
-    
-    if (!tableCheck.rows[0].exists) {
-      // Créer la table si elle n'existe pas
-      await db.query(`
-        CREATE TABLE IF NOT EXISTS parametres_site (
-          id SERIAL PRIMARY KEY,
-          cle VARCHAR(100) UNIQUE NOT NULL,
-          valeur TEXT,
-          description TEXT,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-      `);
-      console.log('✅ Table parametres_site créée');
+    // Essayer de récupérer depuis la DB, sinon utiliser les valeurs par défaut
+    try {
+      const parametres_result = await db.query('SELECT * FROM parametres_site ORDER BY cle');
+      if (parametres_result.rows.length > 0) {
+        console.log('✅ Paramètres récupérés depuis DB:', parametres_result.rows.length);
+        return res.json({
+          success: true,
+          data: parametres_result.rows
+        });
+      }
+    } catch (dbError) {
+      console.log('⚠️ Erreur DB, utilisation des valeurs par défaut:', dbError.message);
     }
     
-    const parametres_result = await db.query('SELECT * FROM parametres_site ORDER BY cle');
-    const parametres = parametres_result.rows;
-    
-    console.log('✅ Paramètres récupérés:', parametres.length);
-
+    console.log('✅ Retour des paramètres par défaut');
     res.json({
       success: true,
-      data: parametres
+      data: defaultParametres
     });
+    
   } catch (error) {
     console.error('❌ Erreur paramètres:', error);
     console.error('Stack:', error.stack);
