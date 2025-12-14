@@ -185,29 +185,62 @@ const MissionsFormations = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {missionsData.map((mission, index) => {
-              const IconComponent = mission.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="card p-8 text-center"
-                >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 ${mission.color} rounded-full mb-6 shadow-lg`}>
-                    {IconComponent && <IconComponent className={`${mission.iconColor} text-4xl`} />}
-                  </div>
-                  <h3 className="text-xl font-bold text-primary mb-4">
-                    {mission.title}
-                  </h3>
-                  <p className="text-slate-700 leading-relaxed">
-                    {mission.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+            {/* Mission évangélique */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="card p-8 text-center"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-6 shadow-lg">
+                <FaMicrophone className="text-gray-900 text-4xl" />
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-4">
+                Mission évangélique
+              </h3>
+              <p className="text-slate-700 leading-relaxed">
+                Conquérir des champs pour le Royaume (prédication, encouragement et implantation)
+              </p>
+            </motion.div>
+
+            {/* Mission Filles2SaraY */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="card p-8 text-center"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-6 shadow-lg">
+                <FaUsers className="text-gray-900 text-4xl" />
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-4">
+                Mission Filles2SaraY
+              </h3>
+              <p className="text-slate-700 leading-relaxed">
+                Restaurer l'identité de la Femme (Sous la tente de Sarah et les programmes divers)
+              </p>
+            </motion.div>
+
+            {/* Mission sociale */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="card p-8 text-center"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-copper rounded-full mb-6 shadow-lg">
+                <FaHandHoldingHeart className="text-white text-4xl" />
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-4">
+                Mission sociale
+              </h3>
+              <p className="text-slate-700 leading-relaxed">
+                Empreinte de l'amour (distribution gratuite et programmes divers)
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
