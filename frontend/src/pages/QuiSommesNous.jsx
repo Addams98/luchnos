@@ -137,7 +137,7 @@ const QuiSommesNous = () => {
                 <p className="text-slate-700 leading-relaxed">
                   Le Centre Missionnaire Lampe Allumée (LUCHNOS) est né d'une visitation divine. 
                   En 2006, le Seigneur me visita et plaça dans mon cœur un fardeau par rapport à son œuvre. 
-                  Au fil des temps, il l'a fait grandir et l'a affermie.
+                  Au fil des temps, il l'a fait grandir et a affermi la vision.
                 </p>
               </motion.div>
 

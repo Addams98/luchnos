@@ -414,7 +414,7 @@ const Presentation = () => {
               Rejoignez-nous dans cette mission
             </h2>
             <p className="text-slate-700 text-lg mb-8 leading-relaxed text-justify">
-              Il ne s'agit pas d'une adhésion à un ministère, mais plutôt d'une participation ou d'une contribution volontaire pour l'avancement de l'œuvre du Seigneur, avec votre don, ton talent et ce qu'il t'a donné en tant que membre du Corps de Christ. Nous devons conjuguer ensemble nos talents pour le Royaume du Père.
+              Il ne s'agit pas d'une adhésion à un ministère, mais plutôt d'une participation ou d'une contribution volontaire pour l'avancement de l'œuvre du Seigneur, avec votre don, votre talent et ce qu'il vous a donné en tant que membre du Corps de Christ. Nous devons conjuguer ensemble nos talents pour le Royaume du Père.
             </p>
             <Link
               to="/contact"

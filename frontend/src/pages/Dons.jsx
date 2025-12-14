@@ -138,7 +138,7 @@ const Dons = () => {
                           {moyen.info}
                         </a>
                       ) : (
-                        <div className="bg-slate-100 rounded-lg px-4 py-3 font-mono text-primary font-semibold">
+                        <div className="bg-slate-100 rounded-lg px-4 py-3 font-mono text-primary font-semibold break-all text-sm">
                           {moyen.info}
                         </div>
                       )}
