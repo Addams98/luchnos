@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaBullhorn, FaUsers, FaHandHoldingHeart, FaBible, FaFire, FaBookOpen, FaGraduationCap, FaChild, FaMegaphone } from 'react-icons/fa';
+import { FaBullhorn, FaUsers, FaHandHoldingHeart, FaBible, FaFire, FaBookOpen, FaGraduationCap, FaChild, FaMegaphone, FaMicrophone } from 'react-icons/fa';
 import { useEffect } from 'react';
 
 const MissionsFormations = () => {
@@ -34,7 +34,7 @@ const MissionsFormations = () => {
     {
       title: "Mission évangélique",
       description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
-      icon: FaMegaphone,
+      icon: FaMicrophone,
       color: "bg-gold",
       iconColor: "text-primary"
     },
