@@ -172,11 +172,19 @@ const AdminLayout = ({ children }) => {
               {/* Notification Messages */}
               <Link
                 to="/admin/messages"
-                className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                className={`relative p-3 rounded-full transition-all ${
+                  unreadMessages > 0 
+                    ? 'bg-red-50 hover:bg-red-100' 
+                    : 'hover:bg-gray-100'
+                }`}
+                title={unreadMessages > 0 ? `${unreadMessages} message(s) non lu(s)` : 'Messages'}
               >
-                <FaBell size={20} className="text-slate" />
+                <FaBell 
+                  size={22} 
+                  className={unreadMessages > 0 ? 'text-red-500' : 'text-gray-400'} 
+                />
                 {unreadMessages > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                  <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg animate-pulse">
                     {unreadMessages}
                   </span>
                 )}
