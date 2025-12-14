@@ -94,7 +94,7 @@ const Home = () => {
     {
       icon: CalendarIcon,
       title: 'Événements',
-      description: 'Restez informé de nos différents programmes.',
+      description: 'Restez informés de nos différents programmes.',
       link: '/evenements',
       borderColor: 'border-l-accent-green',
       iconBg: 'bg-green-50',

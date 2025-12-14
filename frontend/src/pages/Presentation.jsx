@@ -242,12 +242,12 @@ const Presentation = () => {
             {[
               {
                 title: "Formation et équipement",
-                description: "Adressé aux personnes converties et les aspirants au service",
+                description: "Adressée aux personnes converties et les aspirants au service",
                 icon: FaBible
               },
               {
                 title: "Formation des Kephale",
-                description: "Adressé aux hommes (époux, fiancé et aspirant)",
+                description: "Adressée aux hommes (époux, fiancé et aspirant)",
                 icon: FaUsers
               },
               {
@@ -308,7 +308,7 @@ const Presentation = () => {
                 Rassemble toutes les œuvres écrites inspirées du Seigneur.
               </p>
               <p className="text-slate-600">
-                Livres, recueils, magazine etc.
+                Livres, recueils, magazines, etc.
               </p>
               <Link
                 to="/edition"
@@ -414,7 +414,7 @@ const Presentation = () => {
               Rejoignez-nous dans cette mission
             </h2>
             <p className="text-slate-700 text-lg mb-8 leading-relaxed text-justify">
-              Il ne s'agit pas d'une adhésion à un ministère, mais plutôt d'une participation ou d'une contribution volontaire pour l'avancement de l'œuvre du Seigneur, avec ton don, ton talent et ce qu'il t'a donné en tant que membre du Corps de Christ. Nous devons conjuguer ensemble nos talents pour le Royaume du Père.
+              Il ne s'agit pas d'une adhésion à un ministère, mais plutôt d'une participation ou d'une contribution volontaire pour l'avancement de l'œuvre du Seigneur, avec votre don, ton talent et ce qu'il t'a donné en tant que membre du Corps de Christ. Nous devons conjuguer ensemble nos talents pour le Royaume du Père.
             </p>
             <Link
               to="/contact"

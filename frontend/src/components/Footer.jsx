@@ -51,7 +51,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Centre Missionnaire dédié à rallumer,éclairer, encourager et équiper les saints en vue de la préparation au retour de l'Époux et de repondre à son appel.
+              Centre Missionnaire dédié à rallumer, éclairer, encourager et équiper les saints en vue de la préparation au retour de l'Époux et de répondre à son appel.
             </p>
             {/* Réseaux sociaux */}
             <div className="flex space-x-4">

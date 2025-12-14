@@ -137,7 +137,7 @@ const QuiSommesNous = () => {
                 <p className="text-slate-700 leading-relaxed">
                   Le Centre Missionnaire Lampe Allumée (LUCHNOS) est né d'une visitation divine. 
                   En 2006, le Seigneur me visita et plaça dans mon cœur un fardeau par rapport à son œuvre. 
-                  Au fil des temps, il l'a fait grandir et l'a affermi.
+                  Au fil des temps, il l'a fait grandir et l'a affermie.
                 </p>
               </motion.div>
 
@@ -180,8 +180,8 @@ const QuiSommesNous = () => {
                   </div>
                 </div>
                 <p className="text-slate-700 leading-relaxed">
-                  Des années plus tard, j'eus une autre visitation divine dans laquelle le Seigneur m'imposa les mains et m'envoyait accomplir l'œuvre pour laquelle il nous avait appelé : 
-                  rallumer, éclairer, encourager et équiper les saints en vue de la préparation à son retour et de reponde à son appel.
+                  Des années plus tard, j'eus une autre visitation divine dans laquelle le Seigneur m'imposa les mains et m'envoya accomplir l'œuvre pour laquelle il nous avait appelés : 
+                  rallumer, éclairer, encourager et équiper les saints en vue de la préparation à son retour et de réponde à son appel.
                 </p>
               </motion.div>
 
@@ -203,7 +203,7 @@ const QuiSommesNous = () => {
                 </div>
                 <p className="text-slate-700 leading-relaxed">
                   Après cela, Lampe Allumée (Luchnos) est né : un service destiné à la mission, la formation, l'équipement spirituel des hommes, 
-                  des femmes, des enfants et des jeunes par différents programmes et la production d'ouvrages. Avec une équipe des frères et des sœurs, nous œuvrons dans ce sens depuis quelques années.
+                  des femmes, des enfants et des jeunes par différents programmes ainsi que la production d'ouvrages. Avec une équipe des frères et des sœurs, nous œuvrons dans ce sens depuis quelques années.
                 </p>
               </motion.div>
             </div>

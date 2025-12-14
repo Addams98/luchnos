@@ -169,8 +169,22 @@ const Evenements = () => {
       </section>
 
       {/* Liste des événements */}
-      <section className="py-20 bg-slate-light">
+      <section className="py-16 bg-slate-light">
         <div className="container-custom">
+          {/* Texte introductif pour événements passés */}
+          {activeTab === 'termine' && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-12 text-center max-w-4xl mx-auto"
+            >
+              <p className="text-lg text-slate-700 leading-relaxed bg-white p-6 rounded-xl shadow-md">
+                Ces différentes missions et programmes ont été menés à bien par la grâce du Seigneur, certains avant la naissance officielle du service Lampe Allumée, et d'autres après.
+              </p>
+            </motion.div>
+          )}
+
           {loading ? (
             <div className="text-center py-20">
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gold mx-auto"></div>
