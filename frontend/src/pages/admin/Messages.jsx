@@ -51,7 +51,9 @@ const Messages = () => {
   const handleToggleRead = async (id, currentStatus) => {
     try {
       await adminAPI.toggleReadMessage(id);
-      loadMessages();
+      await loadMessages();
+      // Déclencher un événement pour mettre à jour les notifications
+      window.dispatchEvent(new Event('messagesUpdated'));
     } catch (error) {
       console.error('Erreur mise à jour:', error);
     }
@@ -61,7 +63,9 @@ const Messages = () => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
       try {
         await adminAPI.deleteMessage(id);
-        loadMessages();
+        await loadMessages();
+        // Déclencher un événement pour mettre à jour les notifications
+        window.dispatchEvent(new Event('messagesUpdated'));
         if (selectedMessage?.id === id) {
           setShowModal(false);
           setSelectedMessage(null);

@@ -39,7 +39,16 @@ const AdminLayout = ({ children }) => {
     // Actualiser toutes les 30 secondes
     const interval = setInterval(loadUnreadMessages, 30000);
     
-    return () => clearInterval(interval);
+    // Écouter les mises à jour des messages
+    const handleMessagesUpdate = () => {
+      loadUnreadMessages();
+    };
+    window.addEventListener('messagesUpdated', handleMessagesUpdate);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('messagesUpdated', handleMessagesUpdate);
+    };
   }, []);
 
   const loadUnreadMessages = async () => {
