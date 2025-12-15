@@ -5,9 +5,22 @@ const { uploadLivre, uploadPDF } = require('../config/upload');
 const { urlValidation } = require('../middleware/validation');
 const { validateImageUrl, validatePdfUrl } = require('../middleware/urlSecurity');
 
+// ☁️ Cloudinary (prioritaire pour production Render)
+const { 
+  uploadLivreCloudinary, 
+  uploadPDFCloudinary, 
+  isCloudinaryConfigured 
+} = require('../config/cloudinary');
+
+// Choisir le système d'upload selon la configuration
+const uploadImageHandler = isCloudinaryConfigured ? uploadLivreCloudinary : uploadLivre;
+const uploadPDFHandler = isCloudinaryConfigured ? uploadPDFCloudinary : uploadPDF;
+
+console.log('📦 Système d\'upload images:', isCloudinaryConfigured ? 'Cloudinary ☁️' : 'Local 💾');
+
 // POST - Upload image de couverture
 router.post('/upload', (req, res) => {
-  uploadLivre.single('image')(req, res, (err) => {
+  uploadImageHandler.single('image')(req, res, (err) => {
     if (err) {
       console.error('Erreur upload image livre:', err);
       return res.status(400).json({ 
@@ -23,7 +36,12 @@ router.post('/upload', (req, res) => {
       });
     }
     
-    const imageUrl = `/uploads/livres/${req.file.filename}`;
+    // URL Cloudinary (secure_url) ou locale (/uploads/...)
+    const imageUrl = isCloudinaryConfigured 
+      ? req.file.path  // Cloudinary retourne l'URL complète dans req.file.path
+      : `/uploads/livres/${req.file.filename}`;
+    
+    console.log('✅ Image livre uploadée:', imageUrl);
     res.json({ success: true, imageUrl });
   });
 });
@@ -31,7 +49,7 @@ router.post('/upload', (req, res) => {
 // POST - Upload fichier PDF
 router.post('/upload-pdf', (req, res) => {
   console.log('Tentative upload PDF...');
-  uploadPDF.single('pdf')(req, res, (err) => {
+  uploadPDFHandler.single('pdf')(req, res, (err) => {
     if (err) {
       console.error('Erreur upload PDF:', err.message);
       console.error('Type erreur:', err.code);
@@ -49,8 +67,12 @@ router.post('/upload-pdf', (req, res) => {
       });
     }
     
-    console.log('PDF uploadé:', req.file.filename);
-    const pdfUrl = `/uploads/pdfs/${req.file.filename}`;
+    // URL Cloudinary ou locale
+    const pdfUrl = isCloudinaryConfigured
+      ? req.file.path
+      : `/uploads/pdfs/${req.file.filename}`;
+    
+    console.log('✅ PDF uploadé:', pdfUrl);
     res.json({ success: true, pdfUrl });
   });
 });
