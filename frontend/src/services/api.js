@@ -22,10 +22,25 @@ const api = axios.create({
   },
 });
 
+// 🔒 Variable pour éviter les boucles infinies de refresh
+let isRefreshing = false;
+let refreshSubscribers = [];
+
+// 🔒 Notifier tous les appels en attente avec le nouveau token
+function onRefreshed(token) {
+  refreshSubscribers.forEach(callback => callback(token));
+  refreshSubscribers = [];
+}
+
+// 🔒 Ajouter un appel à la file d'attente
+function addRefreshSubscriber(callback) {
+  refreshSubscribers.push(callback);
+}
+
 // Intercepteur pour ajouter le token JWT
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('luchnos_token');
+    const token = localStorage.getItem('luchnos_access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -36,19 +51,81 @@ api.interceptors.request.use(
   }
 );
 
-// Intercepteur pour gérer les erreurs d'authentification
+// 🔒 Intercepteur amélioré pour gérer les refresh tokens automatiquement
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      // Token expiré ou invalide
-      localStorage.removeItem('luchnos_token');
-      localStorage.removeItem('luchnos_user');
-      // Ne rediriger que si on est déjà sur une page admin
-      if (window.location.pathname.startsWith('/admin') && !window.location.pathname.includes('/admin/login')) {
-        window.location.href = '/admin/login';
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Si erreur 401 et pas déjà retrying
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      const errorCode = error.response?.data?.code;
+
+      // Si le token est expiré, tenter de le rafraîchir
+      if (errorCode === 'TOKEN_EXPIRED') {
+        if (isRefreshing) {
+          // Si déjà en train de rafraîchir, attendre
+          return new Promise((resolve) => {
+            addRefreshSubscriber((token) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+              resolve(api(originalRequest));
+            });
+          });
+        }
+
+        originalRequest._retry = true;
+        isRefreshing = true;
+
+        try {
+          const refreshToken = localStorage.getItem('luchnos_refresh_token');
+          
+          if (!refreshToken) {
+            throw new Error('Pas de refresh token disponible');
+          }
+
+          // Appeler l'endpoint de refresh
+          const response = await axios.post(`${API_URL}/auth/refresh`, {
+            refreshToken
+          });
+
+          const { accessToken } = response.data.data;
+
+          // Mettre à jour le token
+          localStorage.setItem('luchnos_access_token', accessToken);
+          
+          // Notifier tous les appels en attente
+          onRefreshed(accessToken);
+          
+          // Réessayer la requête originale
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          isRefreshing = false;
+          
+          return api(originalRequest);
+        } catch (refreshError) {
+          // Refresh échoué, déconnecter l'utilisateur
+          isRefreshing = false;
+          localStorage.removeItem('luchnos_access_token');
+          localStorage.removeItem('luchnos_refresh_token');
+          localStorage.removeItem('luchnos_user');
+          
+          if (window.location.pathname.startsWith('/admin') && !window.location.pathname.includes('/admin/login')) {
+            window.location.href = '/admin/login';
+          }
+          
+          return Promise.reject(refreshError);
+        }
+      } else {
+        // Autres erreurs 401 (token invalide, etc.) → déconnexion
+        localStorage.removeItem('luchnos_access_token');
+        localStorage.removeItem('luchnos_refresh_token');
+        localStorage.removeItem('luchnos_user');
+        
+        if (window.location.pathname.startsWith('/admin') && !window.location.pathname.includes('/admin/login')) {
+          window.location.href = '/admin/login';
+        }
       }
     }
+    
     return Promise.reject(error);
   }
 );
@@ -64,6 +141,9 @@ export const authAPI = {
   getUsers: () => api.get('/auth/users'),
   updateUser: (id, userData) => api.put(`/auth/users/${id}`, userData),
   deleteUser: (id) => api.delete(`/auth/users/${id}`),
+  // 🔒 Nouvelles routes pour refresh tokens
+  refresh: (refreshToken) => axios.post(`${API_URL}/auth/refresh`, { refreshToken }),
+  logout: (refreshToken) => api.post('/auth/logout', { refreshToken }),
 };
 
 // =====================

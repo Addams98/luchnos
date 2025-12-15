@@ -1,10 +1,21 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'luchnos_secret_key_2024_change_in_production';
+// 🔒 CRITIQUE : JWT_SECRET doit être défini dans les variables d'environnement
+// Ne jamais utiliser la valeur par défaut en production !
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
+  console.error('❌ ERREUR CRITIQUE : JWT_SECRET non défini en production !');
+  process.exit(1);
+}
+
+// Fallback uniquement pour développement local
+const JWT_SECRET_WITH_FALLBACK = JWT_SECRET || 'luchnos_dev_secret_DO_NOT_USE_IN_PRODUCTION';
 
 /**
- * Middleware d'authentification JWT
- * Vérifie le token dans les headers Authorization
+ * 🔒 Middleware d'authentification JWT amélioré
+ * Vérifie l'access token dans les headers Authorization
+ * Supporte les refresh tokens pour une sécurité renforcée
  */
 const authMiddleware = (req, res, next) => {
   try {
@@ -14,14 +25,24 @@ const authMiddleware = (req, res, next) => {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ 
         success: false,
-        message: 'Token d\'authentification manquant' 
+        message: 'Token d\'authentification manquant',
+        code: 'NO_TOKEN'
       });
     }
 
     const token = authHeader.substring(7); // Enlever "Bearer "
 
     // Vérifier et décoder le token
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET_WITH_FALLBACK);
+    
+    // 🔒 Vérifier que c'est bien un access token (pas un refresh token)
+    if (decoded.type && decoded.type !== 'access') {
+      return res.status(401).json({ 
+        success: false,
+        message: 'Type de token invalide',
+        code: 'INVALID_TOKEN_TYPE'
+      });
+    }
     
     // Ajouter les infos utilisateur à la requête
     req.user = {
@@ -35,19 +56,22 @@ const authMiddleware = (req, res, next) => {
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({ 
         success: false,
-        message: 'Token invalide' 
+        message: 'Token invalide',
+        code: 'INVALID_TOKEN'
       });
     }
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({ 
         success: false,
-        message: 'Token expiré' 
+        message: 'Token expiré. Veuillez vous reconnecter.',
+        code: 'TOKEN_EXPIRED'
       });
     }
+    console.error('Erreur authMiddleware:', error);
     return res.status(500).json({ 
       success: false,
       message: 'Erreur d\'authentification',
-      error: error.message 
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
@@ -84,5 +108,5 @@ module.exports = {
   authMiddleware,
   adminOnly,
   editorOrAdmin,
-  JWT_SECRET
+  JWT_SECRET: JWT_SECRET_WITH_FALLBACK
 };

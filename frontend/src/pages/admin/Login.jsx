@@ -30,9 +30,15 @@ const Login = () => {
       const response = await authAPI.login(formData);
       
       if (response.data.success) {
-        // Sauvegarder le token et les infos utilisateur
-        localStorage.setItem('luchnos_token', response.data.data.token);
-        localStorage.setItem('luchnos_user', JSON.stringify(response.data.data.user));
+        // 🔒 Sauvegarder les nouveaux tokens (access + refresh)
+        const { accessToken, refreshToken, user } = response.data.data;
+        
+        localStorage.setItem('luchnos_access_token', accessToken);
+        localStorage.setItem('luchnos_refresh_token', refreshToken);
+        localStorage.setItem('luchnos_user', JSON.stringify(user));
+        
+        // Migration : supprimer l'ancien token si présent
+        localStorage.removeItem('luchnos_token');
         
         // Rediriger vers le dashboard
         navigate('/admin/dashboard');
