@@ -263,6 +263,124 @@ const versetValidation = {
 };
 
 /**
+ * 🔒 Validateurs pour les URLs (sécurité critique)
+ */
+const urlValidation = {
+  // Valider les URLs d'images (uploads locaux ou HTTPS externes)
+  imageUrl: body('image_url')
+    .optional()
+    .trim()
+    .custom((value) => {
+      if (!value || value === '') return true;
+      
+      // Autoriser les URLs locales d'upload
+      if (value.startsWith('/uploads/')) {
+        // Vérifier qu'il n'y a pas de traversée de répertoire
+        if (value.includes('..') || value.includes('//')) {
+          throw new Error('URL d\'image invalide : caractères dangereux détectés');
+        }
+        return true;
+      }
+      
+      // Autoriser uniquement HTTPS pour les URLs externes (pas HTTP)
+      if (!value.startsWith('https://')) {
+        throw new Error('Les URLs d\'image externes doivent utiliser HTTPS');
+      }
+      
+      // Valider le format URL
+      try {
+        const url = new URL(value);
+        // Bloquer les protocoles dangereux
+        if (!['https:'].includes(url.protocol)) {
+          throw new Error('Protocole non autorisé');
+        }
+        // Bloquer les URLs vers localhost/IP privées
+        const hostname = url.hostname;
+        if (hostname === 'localhost' || 
+            hostname === '127.0.0.1' || 
+            hostname.startsWith('192.168.') ||
+            hostname.startsWith('10.') ||
+            hostname.match(/^172\.(1[6-9]|2[0-9]|3[01])\./)) {
+          throw new Error('URLs vers IPs privées non autorisées');
+        }
+        return true;
+      } catch (error) {
+        throw new Error(`URL invalide : ${error.message}`);
+      }
+    }),
+  
+  // Valider les URLs de PDF
+  pdfUrl: body('pdf_url')
+    .optional()
+    .trim()
+    .custom((value) => {
+      if (!value || value === '') return true;
+      
+      // Autoriser les URLs locales d'upload
+      if (value.startsWith('/uploads/pdfs/')) {
+        if (value.includes('..') || value.includes('//')) {
+          throw new Error('URL de PDF invalide : caractères dangereux détectés');
+        }
+        // Vérifier l'extension .pdf
+        if (!value.toLowerCase().endsWith('.pdf')) {
+          throw new Error('Le fichier doit être un PDF (.pdf)');
+        }
+        return true;
+      }
+      
+      // URLs externes HTTPS uniquement
+      if (!value.startsWith('https://')) {
+        throw new Error('Les URLs de PDF externes doivent utiliser HTTPS');
+      }
+      
+      try {
+        const url = new URL(value);
+        if (!['https:'].includes(url.protocol)) {
+          throw new Error('Protocole non autorisé');
+        }
+        // Bloquer IPs privées
+        const hostname = url.hostname;
+        if (hostname === 'localhost' || hostname === '127.0.0.1' || 
+            hostname.startsWith('192.168.') || hostname.startsWith('10.') ||
+            hostname.match(/^172\.(1[6-9]|2[0-9]|3[01])\./)) {
+          throw new Error('URLs vers IPs privées non autorisées');
+        }
+        return true;
+      } catch (error) {
+        throw new Error(`URL de PDF invalide : ${error.message}`);
+      }
+    }),
+  
+  // Valider les URLs YouTube (domaine strict)
+  youtubeUrl: body('video_url')
+    .optional()
+    .trim()
+    .custom((value) => {
+      if (!value || value === '') return true;
+      
+      // Autoriser uniquement les domaines YouTube officiels
+      const youtubePatterns = [
+        /^https:\/\/(www\.)?youtube\.com\/watch\?v=[\w-]+/,
+        /^https:\/\/(www\.)?youtube\.com\/embed\/[\w-]+/,
+        /^https:\/\/youtu\.be\/[\w-]+/
+      ];
+      
+      const isValid = youtubePatterns.some(pattern => pattern.test(value));
+      
+      if (!isValid) {
+        throw new Error('URL YouTube invalide. Format attendu : https://youtube.com/watch?v=... ou https://youtu.be/...');
+      }
+      
+      // Bloquer les paramètres suspects
+      if (value.includes('<script>') || value.includes('javascript:') || value.includes('data:')) {
+        throw new Error('URL contient des caractères dangereux');
+      }
+      
+      return true;
+    })
+};
+
+/**
  * 🔒 Validateurs génériques
  */
 const commonValidation = {
@@ -282,5 +400,6 @@ module.exports = {
   contactValidation,
   temoignageValidation,
   versetValidation,
+  urlValidation,
   commonValidation
 };

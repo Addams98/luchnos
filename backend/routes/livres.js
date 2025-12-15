@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
 const { uploadLivre, uploadPDF } = require('../config/upload');
+const { urlValidation } = require('../middleware/validation');
+const { validateImageUrl, validatePdfUrl } = require('../middleware/urlSecurity');
 
 // POST - Upload image de couverture
 router.post('/upload', (req, res) => {
@@ -90,7 +92,7 @@ router.get('/filter/gratuits', async (req, res) => {
 });
 
 // POST - Créer un nouveau livre
-router.post('/', async (req, res) => {
+router.post('/', validateImageUrl, validatePdfUrl, async (req, res) => {
   try {
     const { titre, auteur, description, image_couverture, pdf_url, nombre_pages, categorie, prix, gratuit } = req.body;
     const result = await db.query(
@@ -105,7 +107,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT - Mettre à jour un livre
-router.put('/:id', async (req, res) => {
+router.put('/:id', validateImageUrl, validatePdfUrl, async (req, res) => {
   try {
     const { titre, auteur, description, image_couverture, pdf_url, nombre_pages, categorie, prix, gratuit } = req.body;
     const result = await db.query(

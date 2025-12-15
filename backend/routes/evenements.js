@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
 const { uploadEvenement } = require('../config/upload');
+const { urlValidation, validateRequest } = require('../middleware/validation');
+const { validateImageUrl } = require('../middleware/urlSecurity');
 
 // POST - Upload image d'événement
 router.post('/upload', uploadEvenement.single('image'), (req, res) => {
@@ -55,7 +57,7 @@ router.get('/statut/a-venir', async (req, res) => {
 });
 
 // POST - Créer un nouvel événement
-router.post('/', async (req, res) => {
+router.post('/', validateImageUrl, async (req, res) => {
   try {
     const { titre, description, date_evenement, heure_evenement, lieu, image_url, type_evenement, statut, actif } = req.body;
     const result = await db.query(
@@ -69,7 +71,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT - Mettre à jour un événement
-router.put('/:id', async (req, res) => {
+router.put('/:id', validateImageUrl, async (req, res) => {
   try {
     const { titre, description, date_evenement, heure_evenement, lieu, image_url, type_evenement, statut, actif } = req.body;
     const result = await db.query(

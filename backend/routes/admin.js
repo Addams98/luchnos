@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
-const { authMiddleware, editorOrAdmin } = require('../middleware/auth');
+const { authMiddleware, adminOnly, editorOrAdmin } = require('../middleware/auth');
+const { urlValidation, validateRequest } = require('../middleware/validation');
 
 /**
  * @route   GET /api/admin/messages
