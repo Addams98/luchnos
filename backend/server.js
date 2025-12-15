@@ -67,27 +67,37 @@ const allowedOrigins = [
   'http://localhost:3002'
 ];
 
-app.use(cors({
+// Configuration CORS complète
+const corsOptions = {
   origin: function (origin, callback) {
-    // Autoriser les requêtes sans origin (Postman, curl, etc.)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log('❌ CORS bloqué pour origine:', origin);
-      callback(new Error('Non autorisé par la politique CORS'));
+    // Autoriser les requêtes sans origin (navigation directe, Postman, curl)
+    if (!origin) {
+      return callback(null, true);
     }
+    
+    // Vérifier si l'origine est autorisée
+    if (allowedOrigins.includes(origin)) {
+      console.log('✅ CORS autorisé pour:', origin);
+      return callback(null, true);
+    }
+    
+    // Origine non autorisée
+    console.log('❌ CORS bloqué pour origine:', origin);
+    console.log('📋 Origines autorisées:', allowedOrigins);
+    return callback(null, false); // Ne pas throw d'erreur, juste refuser
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],
-  maxAge: 86400 // 24 heures de cache pour preflight
-}));
+  maxAge: 86400, // 24 heures de cache pour preflight
+  optionsSuccessStatus: 200 // Pour compatibilité anciens navigateurs
+};
+
+app.use(cors(corsOptions));
 
 // 🔒 Middleware explicite pour les requêtes OPTIONS (preflight CORS)
-app.options('*', cors());
+app.options('*', cors(corsOptions));
 
 // Middleware de parsing avec limites de taille
 app.use(bodyParser.json({ limit: '10mb' }));
