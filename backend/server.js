@@ -49,15 +49,38 @@ const authLimiter = rateLimit({
   }
 });
 
-// Middleware CORS
+// 🔒 SÉCURITÉ : Configuration CORS avec origines autorisées
+const allowedOrigins = [
+  'https://luchnos-frontend.onrender.com',
+  'https://luchnos-frontend-web.onrender.com',
+  'https://luchnos.onrender.com',
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://localhost:3001',
+  'http://localhost:3002'
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://luchnos-frontend.onrender.com', 'https://luchnos-frontend-web.onrender.com', 'https://luchnos.onrender.com']
-    : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:3001', 'http://localhost:3002'],
+  origin: function (origin, callback) {
+    // Autoriser les requêtes sans origin (Postman, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('❌ CORS bloqué pour origine:', origin);
+      callback(new Error('Non autorisé par la politique CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  maxAge: 86400 // 24 heures de cache pour preflight
 }));
+
+// 🔒 Middleware explicite pour les requêtes OPTIONS (preflight CORS)
+app.options('*', cors());
 
 // Middleware de parsing avec limites de taille
 app.use(bodyParser.json({ limit: '10mb' }));
