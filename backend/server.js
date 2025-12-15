@@ -9,6 +9,13 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ⚠️ Vérification des variables d'environnement critiques
+console.log('🔍 Vérification configuration...');
+console.log('📍 NODE_ENV:', process.env.NODE_ENV || 'development');
+console.log('📍 PORT:', PORT);
+console.log('📍 JWT_SECRET:', process.env.JWT_SECRET ? '✅ Défini' : '⚠️  Non défini');
+console.log('📍 DB_HOST:', process.env.DB_HOST || 'Non défini');
+
 // 🔒 SÉCURITÉ : Headers HTTP sécurisés avec Helmet
 app.use(helmet({
   contentSecurityPolicy: {
@@ -108,6 +115,24 @@ app.use('/api/maintenance', require('./routes/maintenance'));
 // Route de test
 app.get('/', (req, res) => {
   res.json({ message: '🕯️ Bienvenue sur l\'API Lampe Allumée (Luchnos)' });
+});
+
+// 🔍 Route de santé pour debug CORS
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    success: true,
+    message: 'API fonctionnelle',
+    timestamp: new Date().toISOString(),
+    cors: {
+      origin: req.headers.origin || 'no-origin',
+      allowedOrigins: allowedOrigins
+    },
+    env: {
+      nodeEnv: process.env.NODE_ENV || 'development',
+      hasJwtSecret: !!process.env.JWT_SECRET,
+      port: PORT
+    }
+  });
 });
 
 // Démarrer le serveur
