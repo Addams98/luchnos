@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
+const { contactValidation } = require('../middleware/validation');
 
 // POST - Envoyer un message de contact
-router.post('/', async (req, res) => {
+router.post('/', contactValidation.create, async (req, res) => {
   try {
     const { nom, email, sujet, message } = req.body;
     
-    if (!nom || !email || !message) {
-      return res.status(400).json({ message: 'Nom, email et message sont requis' });
-    }
+    // Validation déjà effectuée par le middleware
+    // Sanitization supplémentaire des données
     
     const result = await db.query(
       'INSERT INTO contacts (nom, email, sujet, message) VALUES ($1, $2, $3, $4) RETURNING *',

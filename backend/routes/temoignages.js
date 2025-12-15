@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
+const { temoignageValidation } = require('../middleware/validation');
 
 // GET - Récupérer tous les témoignages approuvés
 router.get('/', async (req, res) => {
@@ -23,12 +24,12 @@ router.get('/all', async (req, res) => {
 });
 
 // POST - Créer un nouveau témoignage
-router.post('/', async (req, res) => {
+router.post('/', temoignageValidation.create, async (req, res) => {
   try {
-    const { nom, email, temoignage } = req.body;
+    const { nom, email, contenu } = req.body;
     const result = await db.query(
       'INSERT INTO temoignages (nom, email, temoignage, approuve) VALUES ($1, $2, $3, FALSE) RETURNING *',
-      [nom, email || null, temoignage]
+      [nom, email || null, contenu]
     );
     res.status(201).json({ 
       success: true,

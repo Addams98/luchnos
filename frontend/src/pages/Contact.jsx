@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaUser, FaPhone, FaPaperPlane, FaMapMarkerAlt, FaClock, FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa';
 import { contactAPI } from '../services/api';
+import { validateContactForm, sanitizeFormData, detectSuspiciousPatterns } from '../utils/security';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +13,34 @@ const Contact = () => {
     message: ''
   });
   const [message, setMessage] = useState({ text: '', type: '' });
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    // 🔒 Détecter les patterns suspects en temps réel
+    if (detectSuspiciousPatterns(value)) {
+      console.warn(`🚨 Pattern suspect détecté dans: ${name}`);
+      setErrors(prev => ({
+        ...prev,
+        [name]: 'Caractères non autorisés détectés'
+      }));
+      return;
+    }
+    
+    // Effacer l'erreur du champ modifié
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
@@ -25,9 +48,25 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     setMessage({ text: '', type: '' });
+    setErrors({});
+
+    // 🔒 Validation côté client
+    const validation = validateContactForm(formData);
+    if (!validation.valid) {
+      setErrors(validation.errors);
+      setMessage({ 
+        text: 'Veuillez corriger les erreurs dans le formulaire', 
+        type: 'error' 
+      });
+      setLoading(false);
+      return;
+    }
+
+    // 🔒 Sanitization avant envoi
+    const sanitizedData = sanitizeFormData(formData);
 
     try {
-      const response = await contactAPI.send(formData);
+      const response = await contactAPI.send(sanitizedData);
       setMessage({ text: response.data.message, type: 'success' });
       setFormData({
         nom: '',
@@ -95,10 +134,16 @@ const Contact = () => {
                       value={formData.nom}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-gold transition-colors"
+                      maxLength={100}
+                      className={`w-full pl-12 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-colors ${
+                        errors.nom ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-gold'
+                      }`}
                       placeholder="Votre nom"
                     />
                   </div>
+                  {errors.nom && (
+                    <p className="mt-1 text-sm text-red-600">🔒 {errors.nom}</p>
+                  )}
                 </div>
 
                 {/* Email */}
@@ -114,10 +159,16 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-gold transition-colors"
+                      maxLength={255}
+                      className={`w-full pl-12 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-colors ${
+                        errors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-gold'
+                      }`}
                       placeholder="votre@email.com"
                     />
                   </div>
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">🔒 {errors.email}</p>
+                  )}
                 </div>
 
                 {/* Téléphone */}
