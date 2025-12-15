@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaPhone, FaMoneyBillWave } from 'react-icons/fa';
+import { FaWhatsapp, FaPhone, FaMoneyBillWave, FaPaypal } from 'react-icons/fa';
 import { SiMoneygram } from 'react-icons/si';
 
 const Dons = () => {
@@ -9,28 +9,32 @@ const Dons = () => {
       nom: "MoneyGram",
       info: "Transfert MoneyGram",
       description: "Transfert international via MoneyGram",
-      color: "bg-red-600"
+      color: "bg-red-600",
+      iconColor: "text-white"
     },
     {
       icon: FaMoneyBillWave,
       nom: "Ria",
       info: "Transfert Ria",
       description: "Transfert international via Ria Money Transfer",
-      color: "bg-orange-600"
+      color: "bg-orange-600",
+      iconColor: "text-white"
     },
     {
-      icon: FaMoneyBillWave,
+      icon: FaPaypal,
       nom: "PayPal",
       info: "fillesdesaray@gmail.com",
       description: "Paiement en ligne via PayPal",
-      color: "bg-blue-600"
+      color: "bg-blue-600",
+      iconColor: "text-white"
     },
     {
       icon: FaPhone,
       nom: "Moov Money (Libertis)",
       info: "+241 62 50 29 10",
       description: "Mobile Money - Gabon",
-      color: "bg-blue-500"
+      color: "bg-blue-500",
+      iconColor: "text-white"
     }
   ];
 
@@ -119,7 +123,7 @@ const Dons = () => {
                 >
                   <div className="flex items-start gap-4">
                     <div className={`flex-shrink-0 w-16 h-16 ${moyen.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                      <IconComponent className="text-white text-2xl" />
+                      <IconComponent className={`${moyen.iconColor} text-3xl`} />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-primary mb-2">
