@@ -1,13 +1,33 @@
+/**
+ * @fileoverview Service API central avec Axios et gestion automatique des tokens JWT
+ * Gère les requêtes HTTP, l'authentification, et le refresh automatique des tokens
+ * @module services/api
+ */
+
 import axios from 'axios';
 
-// Détection automatique de l'environnement
+/**
+ * Détection automatique de l'environnement (production vs développement)
+ * Basé sur le hostname de l'URL actuelle
+ * @type {boolean}
+ */
 const isProduction = window.location.hostname.includes('onrender.com');
 
-// URL de base pour les assets (images, PDFs)
+/**
+ * URL de base pour les assets statiques (images, PDFs)
+ * Production: https://luchnos.onrender.com
+ * Développement: http://localhost:5000
+ * @type {string}
+ */
 export const BASE_URL = isProduction 
   ? 'https://luchnos.onrender.com'
   : (import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000');
 
+/**
+ * URL de base pour les appels API
+ * Toutes les routes sont préfixées par /api
+ * @type {string}
+ */
 const API_URL = isProduction 
   ? 'https://luchnos.onrender.com/api'
   : (import.meta.env.VITE_API_URL || `${BASE_URL}/api`);
@@ -16,7 +36,12 @@ console.log('🔗 API URL:', API_URL);
 console.log('📁 BASE URL:', BASE_URL);
 console.log('🌍 Environment:', isProduction ? 'Production (Render)' : 'Development (Local)');
 
-// Instance Axios
+/**
+ * Instance Axios configurée pour l'API
+ * Headers par défaut: Content-Type application/json
+ * Base URL déterminée par l'environnement
+ * @type {import('axios').AxiosInstance}
+ */
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -24,17 +49,37 @@ const api = axios.create({
   },
 });
 
-// 🔒 Variable pour éviter les boucles infinies de refresh
+/**
+ * Flag pour éviter les boucles infinies lors du refresh de token
+ * Empêche plusieurs appels simultanés à /api/auth/refresh
+ * @type {boolean}
+ */
 let isRefreshing = false;
+
+/**
+ * File d'attente des requêtes en attente du nouveau token
+ * Stocke les callbacks à appeler après le refresh réussi
+ * @type {Array<Function>}
+ */
 let refreshSubscribers = [];
 
-// 🔒 Notifier tous les appels en attente avec le nouveau token
+/**
+ * Notifie tous les appels en attente avec le nouveau token
+ * Exécute tous les callbacks stockés et vide la file
+ * @param {string} token - Le nouveau access token
+ * @returns {void}
+ */
 function onRefreshed(token) {
   refreshSubscribers.forEach(callback => callback(token));
   refreshSubscribers = [];
 }
 
-// 🔒 Ajouter un appel à la file d'attente
+/**
+ * Ajoute un callback à la file d'attente du refresh token
+ * Le callback sera appelé une fois le nouveau token obtenu
+ * @param {Function} callback - Fonction à appeler avec le nouveau token
+ * @returns {void}
+ */
 function addRefreshSubscriber(callback) {
   refreshSubscribers.push(callback);
 }

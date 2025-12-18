@@ -1,35 +1,82 @@
+/**
+ * @fileoverview Hook React pour la déconnexion automatique après inactivité
+ * Surveille l'activité utilisateur et déconnecte après un délai d'inactivité
+ * @module hooks/useAutoLogout
+ */
+
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 /**
  * Hook personnalisé pour déconnecter automatiquement l'utilisateur après inactivité
- * @param {number} timeout - Délai d'inactivité en millisecondes (défaut: 15 minutes)
+ * 
+ * Fonctionnalités:
+ * - Démarre un timer au chargement de la page
+ * - Reset le timer à chaque activité utilisateur (souris, clavier, scroll, touch)
+ * - Déconnecte et redirige vers /admin/login après le délai d'inactivité
+ * - Vérifie au chargement si la session a expiré pendant l'absence
+ * - Sauvegarde le timestamp de dernière activité lors de la fermeture de page
+ * 
+ * @param {number} timeout - Délai d'inactivité en millisecondes (défaut: 15 minutes = 900000ms)
+ * @returns {{ logout: Function }} - Objet contenant la fonction de déconnexion manuelle
+ * 
+ * @example
+ * // Dans un composant admin
+ * const AdminLayout = () => {
+ *   useAutoLogout(15 * 60 * 1000); // 15 minutes
+ *   return <div>...</div>;
+ * };
  */
 const useAutoLogout = (timeout = 15 * 60 * 1000) => {
   const navigate = useNavigate();
+  
+  /**
+   * Référence mutable pour stocker l'ID du timer
+   * Permet de clearTimeout sans re-render
+   * @type {React.MutableRefObject<NodeJS.Timeout|null>}
+   */
   const timeoutId = useRef(null);
 
+  /**
+   * Déconnecte l'utilisateur et nettoie toutes les données de session
+   * 
+   * Actions effectuées:
+   * - Supprime tous les tokens du localStorage
+   * - Supprime les données utilisateur
+   * - Redirige vers /admin/login avec replace (pas d'historique)
+   * - Log un message dans la console pour debug
+   * 
+   * @returns {void}
+   */
   const logout = () => {
     // Nettoyer le localStorage
     localStorage.removeItem('luchnos_access_token');
     localStorage.removeItem('luchnos_refresh_token');
     localStorage.removeItem('luchnos_user');
-    localStorage.removeItem('luchnos_token'); // Ancien token
+    localStorage.removeItem('luchnos_token'); // Ancien token (migration)
     
-    // Rediriger vers login
+    // Rediriger vers login (replace pour éviter retour arrière)
     navigate('/admin/login', { replace: true });
     
-    // Afficher un message optionnel
+    // Log pour debugging
     console.log('🔒 Session expirée - Déconnexion automatique');
   };
 
+  /**
+   * Réinitialise le timer d'inactivité
+   * 
+   * Appelé à chaque activité utilisateur pour prolonger la session
+   * Efface l'ancien timer et en crée un nouveau
+   * 
+   * @returns {void}
+   */
   const resetTimer = () => {
-    // Effacer le timer existant
+    // Effacer le timer existant si présent
     if (timeoutId.current) {
       clearTimeout(timeoutId.current);
     }
     
-    // Créer un nouveau timer
+    // Créer un nouveau timer qui déconnecte après le délai d'inactivité
     timeoutId.current = setTimeout(() => {
       logout();
     }, timeout);
