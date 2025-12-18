@@ -190,7 +190,7 @@ const Evenements = () => {
               transition={{ duration: 0.6 }}
               className="mb-12 text-center max-w-4xl mx-auto"
             >
-              <p className="text-lg text-slate-700 leading-relaxed bg-white p-6 rounded-xl shadow-md">
+              <p className="text-lg text-slate-700 leading-relaxed bg-white p-6 rounded-xl shadow-md text-justify">
                 Ces différentes missions et programmes ont été menés à bien par la grâce du Seigneur, certains avant la naissance officielle du service Lampe Allumée, et d'autres après.
               </p>
             </motion.div>

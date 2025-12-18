@@ -110,7 +110,7 @@ const Presentation = () => {
                   <div className={`flex-shrink-0 w-12 h-12 ${mission.color} rounded-full flex items-center justify-center shadow-lg`}>
                     <IconComponent className="text-white text-xl" />
                   </div>
-                  <p className="text-slate-700 text-lg leading-relaxed flex-1">
+                  <p className="text-slate-700 text-lg leading-relaxed flex-1 text-justify">
                     {mission.text}
                   </p>
                 </motion.div>
@@ -312,7 +312,7 @@ const Presentation = () => {
             <p className="section-subtitle text-copper italic mb-8">Jérémie 30:2</p>
             <div className="card p-10">
               <FaBook className="text-gold text-6xl mx-auto mb-6" />
-              <p className="text-slate-700 text-lg leading-relaxed mb-4">
+              <p className="text-slate-700 text-lg leading-relaxed mb-4 text-justify">
                 Rassemble toutes les œuvres écrites inspirées du Seigneur.
               </p>
               <p className="text-slate-600">

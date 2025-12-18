@@ -188,7 +188,7 @@ const Dons = () => {
             <h2 className="text-3xl font-bold text-primary mb-6">
               Besoin d'Aide ?
             </h2>
-            <p className="text-slate-700 text-lg mb-8 leading-relaxed">
+            <p className="text-slate-700 text-lg mb-8 leading-relaxed text-justify">
               Pour toute question concernant vos dons ou pour obtenir plus d'informations, n'hésitez pas à nous contacter.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

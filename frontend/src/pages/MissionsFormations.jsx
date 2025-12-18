@@ -207,7 +207,7 @@ const MissionsFormations = () => {
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission évangélique
               </h3>
-              <p className="text-slate-700 leading-relaxed">
+              <p className="text-slate-700 leading-relaxed text-justify">
                 Conquérir des champs pour le Royaume (prédication, encouragement et implantation)
               </p>
             </motion.div>
@@ -226,7 +226,7 @@ const MissionsFormations = () => {
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission Filles2SaraY
               </h3>
-              <p className="text-slate-700 leading-relaxed">
+              <p className="text-slate-700 leading-relaxed text-justify">
                 Restaurer l'identité de la Femme (Sous la tente de Sarah et les programmes divers)
               </p>
             </motion.div>
@@ -245,7 +245,7 @@ const MissionsFormations = () => {
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission sociale
               </h3>
-              <p className="text-slate-700 leading-relaxed">
+              <p className="text-slate-700 leading-relaxed text-justify">
                 Empreinte de l'amour (distribution gratuite et programmes divers)
               </p>
             </motion.div>
@@ -314,7 +314,7 @@ const MissionsFormations = () => {
               </div>
               <h2 className="text-4xl font-bold text-primary mb-2">{editionPlumage.title}</h2>
               <p className="text-gold text-xl italic mb-6">{editionPlumage.verse}</p>
-              <p className="text-slate-700 text-lg mb-6 leading-relaxed">
+              <p className="text-slate-700 text-lg mb-6 leading-relaxed text-justify">
                 {editionPlumage.description}
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
@@ -344,7 +344,7 @@ const MissionsFormations = () => {
             </div>
             <h2 className="text-4xl font-bold text-white mb-2">{luchnosHeritage.title}</h2>
             <p className="text-gold text-xl italic mb-6">{luchnosHeritage.verse}</p>
-            <p className="text-slate-200 text-lg mb-12 leading-relaxed">
+            <p className="text-slate-200 text-lg mb-12 leading-relaxed text-justify">
               {luchnosHeritage.description}
             </p>
 
@@ -384,7 +384,7 @@ const MissionsFormations = () => {
             <h2 className="text-3xl font-bold text-primary mb-6">
               Rejoignez-nous dans cette mission
             </h2>
-            <p className="text-slate-700 text-lg mb-8 leading-relaxed">
+            <p className="text-slate-700 text-lg mb-8 leading-relaxed text-justify">
               Que vous soyez appelé aux missions, aux formations bibliques, à l'édition ou au ministère auprès des jeunes,
               il y a une place pour vous dans le Centre Missionnaire Lampe Allumée.
             </p>

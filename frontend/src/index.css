@@ -33,12 +33,12 @@
   }
   
   .section-subtitle {
-    @apply text-lg text-slate-600 mb-8 text-justify;
+    @apply text-lg text-slate-600 mb-8;
   }
   
-  /* Textes et paragraphes justifiés */
-  p {
-    @apply text-justify;
+  /* Classe utilitaire pour textes longs justifiés */
+  .text-content {
+    @apply text-justify leading-relaxed;
   }
   
   /* Liens */

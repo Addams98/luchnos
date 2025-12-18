@@ -194,7 +194,7 @@ const EvenementDetails = () => {
             <div className="mb-12">
               <h2 className="text-3xl font-bold text-primary mb-6">À propos de cet événement</h2>
               <div className="prose prose-lg max-w-none">
-                <p className="text-slate-700 text-lg leading-relaxed whitespace-pre-line">
+                <p className="text-slate-700 text-lg leading-relaxed whitespace-pre-line text-justify">
                   {evenement.description}
                 </p>
               </div>
