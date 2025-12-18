@@ -193,8 +193,8 @@ const MissionsFormations = () => {
               viewport={{ once: true }}
               className="card p-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
-                <FaMicrophone className="text-gold text-3xl" />
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-full mb-6 shadow-xl">
+                <FaMicrophone className="text-gold text-4xl drop-shadow-lg" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission évangélique
@@ -212,8 +212,8 @@ const MissionsFormations = () => {
               viewport={{ once: true }}
               className="card p-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
-                <FaUsers className="text-gold text-3xl" />
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-full mb-6 shadow-xl">
+                <FaUsers className="text-gold text-4xl drop-shadow-lg" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission Filles2SaraY
@@ -231,8 +231,8 @@ const MissionsFormations = () => {
               viewport={{ once: true }}
               className="card p-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
-                <FaHandHoldingHeart className="text-gold text-3xl" />
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-full mb-6 shadow-xl">
+                <FaHandHoldingHeart className="text-gold text-4xl drop-shadow-lg" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">
                 Mission sociale
