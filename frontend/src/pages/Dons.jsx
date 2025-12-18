@@ -1,40 +1,41 @@
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaPhone, FaMoneyBillWave, FaPaypal } from 'react-icons/fa';
-import { SiMoneygram } from 'react-icons/si';
+import { FaWhatsapp, FaPhone } from 'react-icons/fa';
+
+// Import des logos depuis le dossier Images
+import logoMoneyGram from '../Images/png-clipart-money-gram-logo-logo-moneygram-international-inc-money-transfer-sss-logo-text-logo.png';
+import logoRia from '../Images/RIA.jpg';
+import logoPayPal from '../Images/paypal_logo_icon_147252.webp';
+import logoGSM from '../Images/gsm_artiste_20230306101519_a33m1md3d4h58oe6gjg0hg6s0i.png';
 
 const Dons = () => {
   const moyensPaiement = [
     {
-      icon: SiMoneygram,
+      logo: logoMoneyGram,
       nom: "MoneyGram",
       info: "Transfert MoneyGram",
       description: "Transfert international via MoneyGram",
-      color: "bg-red-600",
-      iconColor: "text-white"
+      color: "bg-white"
     },
     {
-      icon: FaMoneyBillWave,
+      logo: logoRia,
       nom: "Ria",
       info: "Transfert Ria",
       description: "Transfert international via Ria Money Transfer",
-      color: "bg-orange-600",
-      iconColor: "text-white"
+      color: "bg-white"
     },
     {
-      icon: FaPaypal,
+      logo: logoPayPal,
       nom: "PayPal",
       info: "fillesdesaray@gmail.com",
       description: "Paiement en ligne via PayPal",
-      color: "bg-blue-600",
-      iconColor: "text-white"
+      color: "bg-white"
     },
     {
-      icon: FaPhone,
-      nom: "Moov Money (Libertis)",
+      logo: logoGSM,
+      nom: "Orange Money / Moov Money",
       info: "+241 62 50 29 10",
       description: "Mobile Money - Gabon",
-      color: "bg-blue-500",
-      iconColor: "text-white"
+      color: "bg-white"
     }
   ];
 
@@ -111,7 +112,6 @@ const Dons = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {moyensPaiement.map((moyen, index) => {
-              const IconComponent = moyen.icon;
               return (
                 <motion.div
                   key={index}
@@ -119,11 +119,15 @@ const Dons = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="card p-6 hover:shadow-xl transition-all duration-300"
+                  className="card p-6 hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 w-16 h-16 ${moyen.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                      <IconComponent className={`${moyen.iconColor} text-3xl`} />
+                    <div className={`flex-shrink-0 w-20 h-20 ${moyen.color} rounded-xl flex items-center justify-center shadow-md border border-slate-200 p-2`}>
+                      <img 
+                        src={moyen.logo} 
+                        alt={`Logo ${moyen.nom}`}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-primary mb-2">
