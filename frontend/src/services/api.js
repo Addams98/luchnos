@@ -2,17 +2,19 @@ import axios from 'axios';
 
 // Détection automatique de l'environnement
 const isProduction = window.location.hostname.includes('onrender.com');
-const API_URL = isProduction 
-  ? 'https://luchnos.onrender.com/api'
-  : (import.meta.env.VITE_API_URL || '${BASE_URL}/api');
 
 // URL de base pour les assets (images, PDFs)
 export const BASE_URL = isProduction 
   ? 'https://luchnos.onrender.com'
-  : '${BASE_URL}';
+  : (import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000');
+
+const API_URL = isProduction 
+  ? 'https://luchnos.onrender.com/api'
+  : (import.meta.env.VITE_API_URL || `${BASE_URL}/api`);
 
 console.log('🔗 API URL:', API_URL);
 console.log('📁 BASE URL:', BASE_URL);
+console.log('🌍 Environment:', isProduction ? 'Production (Render)' : 'Development (Local)');
 
 // Instance Axios
 const api = axios.create({
@@ -56,6 +58,14 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+
+    // Détecter si le backend est complètement down (pas de réponse)
+    if (!error.response) {
+      console.error('❌ Backend inaccessible:', error.message);
+      console.error('🔍 Vérifiez que le backend est démarré sur:', API_URL);
+      // Ne pas bloquer les requêtes publiques, juste logger l'erreur
+      return Promise.reject(error);
+    }
 
     // Si erreur 401 et pas déjà retrying
     if (error.response?.status === 401 && !originalRequest._retry) {

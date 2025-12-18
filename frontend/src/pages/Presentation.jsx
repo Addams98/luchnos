@@ -61,7 +61,7 @@ const Presentation = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-white">LAMPE ALLUMÉE</span>{' '}
             <span className="text-gold">(LUCHNOS)</span>{' '}
-            <span className="text-gold">🔥</span>
+            <span className="text-gold"></span>
           </h2>
           <p className="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-4">
             Matthieu 25:1-13
