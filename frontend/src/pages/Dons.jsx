@@ -5,7 +5,6 @@ import { FaWhatsapp, FaPhone, FaMoneyBillWave } from 'react-icons/fa';
 import logoMoneyGram from '../Images/png-clipart-money-gram-logo-logo-moneygram-international-inc-money-transfer-sss-logo-text-logo.png';
 import logoRia from '../Images/RIA.jpg';
 import logoPayPal from '../Images/paypal_logo_icon_147252.webp';
-import logoGSM from '../Images/gsm_artiste_20230306101519_a33m1md3d4h58oe6gjg0hg6s0i.png';
 
 const Dons = () => {
   const moyensPaiement = [
@@ -28,13 +27,6 @@ const Dons = () => {
       nom: "PayPal",
       info: "fillesdesaray@gmail.com",
       description: "Paiement en ligne via PayPal",
-      color: "bg-white"
-    },
-    {
-      logo: logoGSM,
-      nom: "Orange Money / Moov Money",
-      info: "+241 62 50 29 10",
-      description: "Mobile Money - Gabon",
       color: "bg-white"
     }
   ];
