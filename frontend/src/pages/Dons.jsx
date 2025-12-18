@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaPhone } from 'react-icons/fa';
+import { FaWhatsapp, FaPhone, FaMoneyBillWave } from 'react-icons/fa';
 
 // Import des logos depuis le dossier Images
 import logoMoneyGram from '../Images/png-clipart-money-gram-logo-logo-moneygram-international-inc-money-transfer-sss-logo-text-logo.png';
