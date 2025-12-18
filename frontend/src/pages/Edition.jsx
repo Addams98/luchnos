@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaBook, FaDownload, FaSearch, FaCheckCircle, FaFilter } from 'react-icons/fa';
+import { FaBook, FaDownload, FaSearch, FaCheckCircle, FaFilter, FaFeatherAlt } from 'react-icons/fa';
 import { livresAPI, BASE_URL } from '../services/api';
 
 const Edition = () => {
@@ -124,7 +124,7 @@ const Edition = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-flex items-center justify-center w-24 h-24 bg-gold/20 rounded-full mb-6"
           >
-            <FaBook className="text-gold text-5xl animate-pulse" />
+            <FaFeatherAlt className="text-gold text-5xl animate-pulse" />
           </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             <span className="text-white">Édition</span>{' '}

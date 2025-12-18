@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaFire, FaBible, FaBook, FaUsers, FaChild, FaBullhorn, FaHandHoldingHeart, FaLightbulb, FaGraduationCap, FaHeart, FaPen, FaFemale, FaSeedling } from 'react-icons/fa';
+import { FaLightbulb, FaBible, FaBook, FaUsers, FaChild, FaBullhorn, FaHandHoldingHeart, FaGraduationCap, FaHeart, FaPen, FaFemale, FaSeedling } from 'react-icons/fa';
 
 const Presentation = () => {
   const compartiments = [
@@ -52,7 +52,7 @@ const Presentation = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-flex items-center justify-center w-24 h-24 bg-gold/20 rounded-full mb-6"
           >
-            <FaFire className="text-gold text-5xl animate-pulse" />
+            <FaLightbulb className="text-gold text-5xl animate-pulse" />
           </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
             <span className="text-white">CENTRE</span>{' '}
