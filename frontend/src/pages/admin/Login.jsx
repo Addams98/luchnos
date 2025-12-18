@@ -40,6 +40,9 @@ const Login = () => {
         // Migration : supprimer l'ancien token si présent
         localStorage.removeItem('luchnos_token');
         
+        // 🕐 Mettre à jour le timestamp de dernière activité
+        localStorage.setItem('luchnos_last_activity', Date.now().toString());
+        
         // Rediriger vers le dashboard
         navigate('/admin/dashboard');
       }

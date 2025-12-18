@@ -56,7 +56,25 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
       document.addEventListener(event, handleActivity);
     });
 
-    // Démarrer le timer initial
+    // Vérifier au chargement si la session est expirée (avant de démarrer le timer)
+    const lastActivity = localStorage.getItem('luchnos_last_activity');
+    const hasToken = localStorage.getItem('luchnos_access_token') || localStorage.getItem('luchnos_token');
+    
+    // Vérifier l'expiration UNIQUEMENT si:
+    // 1. Il y a un token (utilisateur connecté)
+    // 2. Il y a une dernière activité enregistrée
+    // 3. Le temps écoulé dépasse le timeout
+    if (hasToken && lastActivity) {
+      const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
+      if (timeSinceLastActivity > timeout) {
+        // Session expirée pendant l'absence
+        console.log('🔒 Session expirée (inactivité depuis', Math.round(timeSinceLastActivity / 60000), 'minutes)');
+        logout();
+        return; // Ne pas continuer si on déconnecte
+      }
+    }
+
+    // Démarrer le timer initial (seulement si pas déconnecté)
     resetTimer();
 
     // Sauvegarder le timestamp de dernière activité lors de la fermeture
@@ -67,16 +85,6 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
 
     // Écouter la fermeture de page
     window.addEventListener('beforeunload', handleBeforeUnload);
-    
-    // Vérifier au chargement si la session est expirée
-    const lastActivity = localStorage.getItem('luchnos_last_activity');
-    if (lastActivity) {
-      const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
-      if (timeSinceLastActivity > timeout) {
-        // Session expirée pendant l'absence
-        logout();
-      }
-    }
 
     // Nettoyer lors du démontage
     return () => {
