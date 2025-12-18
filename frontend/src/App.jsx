@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import BackendStatus from './components/BackendStatus';
 import Home from './pages/Home';
 import Presentation from './pages/Presentation';
 import QuiSommesNous from './pages/QuiSommesNous';
@@ -30,6 +31,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <BackendStatus />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={
