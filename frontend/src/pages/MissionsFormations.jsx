@@ -123,9 +123,14 @@ const MissionsFormations = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4"
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gold/20 rounded-full mb-6">
-            <FaFire className="text-gold text-4xl animate-pulse" />
-          </div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center justify-center w-24 h-24 bg-gold/20 rounded-full mb-6"
+          >
+            <FaFire className="text-gold text-5xl animate-pulse" />
+          </motion.div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             MISSIONS & FORMATIONS BIBLIQUES
           </h1>
