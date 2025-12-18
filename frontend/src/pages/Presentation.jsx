@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaLightbulb, FaBible, FaBook, FaUsers, FaChild, FaBullhorn, FaHandHoldingHeart, FaGraduationCap, FaHeart, FaPen, FaFemale, FaSeedling } from 'react-icons/fa';
+import { FaLightbulb, FaFire, FaBible, FaBook, FaUsers, FaChild, FaBullhorn, FaHandHoldingHeart, FaGraduationCap, FaHeart, FaPen, FaFemale, FaSeedling } from 'react-icons/fa';
 
 const Presentation = () => {
   const compartiments = [
