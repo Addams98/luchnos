@@ -19,6 +19,7 @@ import {
   FaBell
 } from 'react-icons/fa';
 import { adminAPI } from '../services/api';
+import useAutoLogout from '../hooks/useAutoLogout';
 
 const AdminLayout = ({ children }) => {
   const location = useLocation();
@@ -26,6 +27,9 @@ const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [user, setUser] = useState(null);
   const [unreadMessages, setUnreadMessages] = useState(0);
+  
+  // 🔒 Déconnexion automatique après 15 minutes d'inactivité
+  useAutoLogout(15 * 60 * 1000); // 15 minutes
 
   useEffect(() => {
     const userData = localStorage.getItem('luchnos_user');
@@ -60,7 +64,10 @@ const AdminLayout = ({ children }) => {
     } catch (error) {
       console.error('Erreur chargement messages non lus:', error);
     }
-  };
+  };// Nettoyer tous les tokens
+    localStorage.removeItem('luchnos_access_token');
+    localStorage.removeItem('luchnos_refresh_token');
+    
 
   const handleLogout = () => {
     localStorage.removeItem('luchnos_token');
