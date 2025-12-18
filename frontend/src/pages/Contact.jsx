@@ -93,12 +93,20 @@ const Contact = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 text-center"
+          className="relative z-10 text-center px-4"
         >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center justify-center w-24 h-24 bg-gold/20 rounded-full mb-6"
+          >
+            <FaEnvelope className="text-gold text-5xl animate-pulse" />
+          </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Contactez-Nous
           </h1>
-          <p className="text-xl text-slate-200 max-w-2xl mx-auto px-4">
+          <p className="text-xl text-slate-200 max-w-2xl mx-auto">
             Nous serions ravis d'avoir de vos nouvelles
           </p>
         </motion.div>
