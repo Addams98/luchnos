@@ -93,8 +93,9 @@ const Evenements = () => {
           >
             <FaCalendarAlt className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Nos Événements
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="text-white">Nos</span>{' '}
+            <span className="text-gold">Événements</span>
           </h1>
           <p className="text-xl text-slate-200 max-w-2xl mx-auto">
             Découvrez nos prochaines rencontres et célébrations

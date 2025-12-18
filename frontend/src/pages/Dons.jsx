@@ -58,8 +58,9 @@ const Dons = () => {
           >
             <FaMoneyBillWave className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            NOUS SOUTENIR
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-gold">NOUS</span>{' '}
+            <span className="text-white">SOUTENIR</span>
           </h1>
           <p className="text-xl text-slate-200 max-w-3xl mx-auto">
             Votre soutien permet de faire avancer l'œuvre du Père céleste

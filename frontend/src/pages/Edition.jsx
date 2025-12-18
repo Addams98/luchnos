@@ -126,8 +126,9 @@ const Edition = () => {
           >
             <FaBook className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Édition Plumage
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="text-white">Édition</span>{' '}
+            <span className="text-gold">Plumage</span>
           </h1>
           <p className="text-xl text-slate-200 max-w-2xl mx-auto">
             Livres chrétiens gratuits à consulter en ligne ou à télécharger

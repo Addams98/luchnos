@@ -11,7 +11,8 @@ export default {
         primary: {
           DEFAULT: '#191F34', // Bleu nuit du fond (couleur dominante)
           light: '#1C2235',   // Variante claire
-          dark: '#1A2034'     // Variante foncée
+          dark: '#1A2034',    // Variante foncée
+          hero: '#1D2739'     // Couleur sections hero
         },
         gold: {
           DEFAULT: '#FFC100', // Jaune du texte et de la flamme
@@ -53,7 +54,7 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #191F34 0%, #1C2235 100%)', // Bleu nuit du logo
+        'gradient-primary': 'linear-gradient(135deg, #1D2739 0%, #1D2739 100%)', // Couleur sections hero
         'gradient-gold': 'linear-gradient(135deg, #FFC100 0%, #FFD700 100%)',    // Jaune du logo
         'gradient-flame': 'radial-gradient(circle, #FFC100 0%, #FF8C00 60%, #FFD700 100%)', // Flamme
         'gradient-copper': 'linear-gradient(135deg, #CC7447 0%, #9F4A15 100%)',  // Cuivre de la lampe

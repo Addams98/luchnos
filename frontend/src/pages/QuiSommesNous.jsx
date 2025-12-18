@@ -86,7 +86,9 @@ const QuiSommesNous = () => {
             </motion.div>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Qui Sommes-Nous ?
+              <span className="text-white">Qui</span>{' '}
+              <span className="text-gold">Sommes</span>
+              <span className="text-white">-Nous ?</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-slate-200 leading-relaxed mb-8">

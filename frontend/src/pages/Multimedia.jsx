@@ -112,8 +112,9 @@ const Multimedia = () => {
           >
             <FaPlay className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Luchnos Multimédia
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="text-gold">Luchnos</span>{' '}
+            <span className="text-white">Multimédia</span>
           </h1>
           <p className="text-xl text-slate-200 max-w-2xl mx-auto">
             Enseignements et contenus spirituels enrichissants

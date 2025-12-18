@@ -103,8 +103,9 @@ const Contact = () => {
           >
             <FaEnvelope className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Contactez-Nous
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="text-white">Contactez</span>
+            <span className="text-gold">-Nous</span>
           </h1>
           <p className="text-xl text-slate-200 max-w-2xl mx-auto">
             Nous serions ravis d'avoir de vos nouvelles

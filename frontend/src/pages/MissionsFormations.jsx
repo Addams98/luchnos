@@ -131,8 +131,11 @@ const MissionsFormations = () => {
           >
             <FaFire className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            MISSIONS & FORMATIONS BIBLIQUES
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-white">MISSIONS</span>{' '}
+            <span className="text-gold">&</span>{' '}
+            <span className="text-white">FORMATIONS</span>{' '}
+            <span className="text-gold">BIBLIQUES</span>
           </h1>
           <p className="text-xl text-slate-200 max-w-3xl mx-auto">
             Les 4 Compartiments du Centre Missionnaire Lampe Allumée

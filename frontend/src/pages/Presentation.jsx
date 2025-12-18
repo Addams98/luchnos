@@ -54,11 +54,14 @@ const Presentation = () => {
           >
             <FaFire className="text-gold text-5xl animate-pulse" />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            CENTRE MISSIONNAIRE
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <span className="text-white">CENTRE</span>{' '}
+            <span className="text-gold">MISSIONNAIRE</span>
           </h1>
-          <h2 className="text-4xl md:text-5xl font-bold text-gold mb-6">
-            LAMPE ALLUMÉE (LUCHNOS) 🔥
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-white">LAMPE ALLUMÉE</span>{' '}
+            <span className="text-gold">(LUCHNOS)</span>{' '}
+            <span className="text-gold">🔥</span>
           </h2>
           <p className="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-4">
             Matthieu 25:1-13
