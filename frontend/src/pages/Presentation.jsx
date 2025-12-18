@@ -180,19 +180,19 @@ const Presentation = () => {
                 title: "Mission évangélique",
                 description: "Conquérir des champs pour le Royaume (prédication, encouragement et implantation)",
                 icon: FaBullhorn,
-                color: "text-gold"
+                color: "text-primary"
               },
               {
                 title: "Mission Filles2SaraY",
                 description: "Restaurer l'identité de la Femme (Sous la tente de Sarah et les programmes divers)",
                 icon: FaUsers,
-                color: "text-copper"
+                color: "text-primary"
               },
               {
                 title: "Mission sociale",
                 description: "Empreinte de l'amour (distribution gratuite et programmes divers)",
                 icon: FaHandHoldingHeart,
-                color: "text-red-500"
+                color: "text-primary"
               }
             ].map((mission, index) => {
               const IconComponent = mission.icon;
@@ -205,8 +205,8 @@ const Presentation = () => {
                   viewport={{ once: true }}
                   className="card p-8 text-center"
                 >
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-gold rounded-full mb-6">
-                    <IconComponent className={`${mission.color} text-3xl`} />
+                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-gold rounded-full mb-6 shadow-2xl">
+                    <IconComponent className={`${mission.color} text-5xl drop-shadow-md`} style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.2))' }} />
                   </div>
                   <h3 className="text-xl font-bold text-primary mb-4">
                     {mission.title}
