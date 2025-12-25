@@ -29,7 +29,8 @@ const AdminLayout = ({ children }) => {
   const [unreadMessages, setUnreadMessages] = useState(0);
   
   // 🔒 Déconnexion automatique après 15 minutes d'inactivité
-  useAutoLogout(15 * 60 * 1000); // 15 minutes
+  // TEMPORAIREMENT DÉSACTIVÉ POUR DEBUG
+  // useAutoLogout(15 * 60 * 1000); // 15 minutes
 
   useEffect(() => {
     const userData = localStorage.getItem('luchnos_user');

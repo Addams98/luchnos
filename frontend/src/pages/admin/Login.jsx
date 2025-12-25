@@ -27,11 +27,21 @@ const Login = () => {
     setError('');
 
     try {
+      console.log('🔐 [Login] Envoi requête login...');
       const response = await authAPI.login(formData);
+      
+      console.log('📥 [Login] Réponse reçue:', {
+        success: response.data.success,
+        hasAccessToken: !!response.data.data?.accessToken,
+        hasRefreshToken: !!response.data.data?.refreshToken,
+        hasUser: !!response.data.data?.user
+      });
       
       if (response.data.success) {
         // 🔒 Sauvegarder les nouveaux tokens (access + refresh)
         const { accessToken, refreshToken, user } = response.data.data;
+        
+        console.log('💾 [Login] Sauvegarde dans localStorage...');
         
         // Sauvegarder les tokens et données utilisateur
         localStorage.setItem('luchnos_access_token', accessToken);
@@ -42,10 +52,20 @@ const Login = () => {
         // Migration : supprimer l'ancien token si présent
         localStorage.removeItem('luchnos_token');
         
+        console.log('✅ [Login] Données sauvegardées:', {
+          accessToken: localStorage.getItem('luchnos_access_token')?.substring(0, 20) + '...',
+          hasRefreshToken: !!localStorage.getItem('luchnos_refresh_token'),
+          hasUser: !!localStorage.getItem('luchnos_user'),
+          lastActivity: localStorage.getItem('luchnos_last_activity')
+        });
+        
+        console.log('🚀 [Login] Navigation vers /admin/dashboard');
+        
         // Rediriger vers le dashboard
         navigate('/admin/dashboard');
       }
     } catch (err) {
+      console.error('❌ [Login] Erreur:', err);
       setError(err.response?.data?.message || 'Erreur de connexion');
     } finally {
       setLoading(false);
