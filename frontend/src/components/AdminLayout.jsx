@@ -58,21 +58,32 @@ const AdminLayout = ({ children }) => {
 
   const loadUnreadMessages = async () => {
     try {
+      // Vérifier qu'on a bien un token avant de faire la requête
+      const hasToken = localStorage.getItem('luchnos_access_token') || localStorage.getItem('luchnos_token');
+      if (!hasToken) {
+        console.log('⚠️ [AdminLayout] Pas de token, skip loadUnreadMessages');
+        return;
+      }
+      
       const response = await adminAPI.getStats();
       if (response.data.success) {
         setUnreadMessages(response.data.data.stats.messages_non_lus || 0);
       }
     } catch (error) {
-      console.error('Erreur chargement messages non lus:', error);
+      // Ne pas logger d'erreur si c'est juste une 401 (sera géré par l'interceptor)
+      if (error.response?.status !== 401) {
+        console.error('Erreur chargement messages non lus:', error);
+      }
     }
-  };// Nettoyer tous les tokens
-    localStorage.removeItem('luchnos_access_token');
-    localStorage.removeItem('luchnos_refresh_token');
-    
+  };
 
   const handleLogout = () => {
+    // Nettoyer tous les tokens (nouveaux + anciens)
+    localStorage.removeItem('luchnos_access_token');
+    localStorage.removeItem('luchnos_refresh_token');
     localStorage.removeItem('luchnos_token');
     localStorage.removeItem('luchnos_user');
+    localStorage.removeItem('luchnos_last_activity');
     navigate('/admin/login');
   };
 

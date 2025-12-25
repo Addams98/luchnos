@@ -170,12 +170,22 @@ api.interceptors.response.use(
           return Promise.reject(refreshError);
         }
       } else {
-        // Autres erreurs 401 (token invalide, etc.) → déconnexion
-        localStorage.removeItem('luchnos_access_token');
-        localStorage.removeItem('luchnos_refresh_token');
-        localStorage.removeItem('luchnos_user');
+        // Autres erreurs 401 (token invalide, etc.)
+        // ⚠️ NE PAS déconnecter automatiquement sur toutes les 401
+        // Laisser le composant gérer l'erreur
+        console.warn('⚠️ [API] Erreur 401 sans TOKEN_EXPIRED:', error.response?.data);
         
-        if (window.location.pathname.startsWith('/admin') && !window.location.pathname.includes('/admin/login')) {
+        // UNIQUEMENT déconnecter si c'est explicitement une erreur d'authentification
+        // ET si on est sur une route admin protégée
+        const isTokenInvalid = error.response?.data?.code === 'TOKEN_INVALID' || 
+                               error.response?.data?.message?.includes('non valide') ||
+                               error.response?.data?.message?.includes('invalid');
+        
+        if (isTokenInvalid && window.location.pathname.startsWith('/admin') && !window.location.pathname.includes('/admin/login')) {
+          console.log('🔒 [API] Token invalide → Déconnexion');
+          localStorage.removeItem('luchnos_access_token');
+          localStorage.removeItem('luchnos_refresh_token');
+          localStorage.removeItem('luchnos_user');
           window.location.href = '/admin/login';
         }
       }
