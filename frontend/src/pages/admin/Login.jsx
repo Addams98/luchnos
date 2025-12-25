@@ -33,15 +33,15 @@ const Login = () => {
         // 🔒 Sauvegarder les nouveaux tokens (access + refresh)
         const { accessToken, refreshToken, user } = response.data.data;
         
+        // 🕐 IMPORTANT: Définir le timestamp AVANT les tokens pour éviter race condition
+        localStorage.setItem('luchnos_last_activity', Date.now().toString());
+        
         localStorage.setItem('luchnos_access_token', accessToken);
         localStorage.setItem('luchnos_refresh_token', refreshToken);
         localStorage.setItem('luchnos_user', JSON.stringify(user));
         
         // Migration : supprimer l'ancien token si présent
         localStorage.removeItem('luchnos_token');
-        
-        // 🕐 Mettre à jour le timestamp de dernière activité
-        localStorage.setItem('luchnos_last_activity', Date.now().toString());
         
         // Rediriger vers le dashboard
         navigate('/admin/dashboard');

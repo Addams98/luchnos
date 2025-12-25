@@ -113,7 +113,9 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
     // 3. Le temps écoulé dépasse le timeout
     if (hasToken && lastActivity) {
       const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
-      if (timeSinceLastActivity > timeout) {
+      
+      // Ajouter une marge de 5 secondes pour éviter les faux positifs lors de la connexion
+      if (timeSinceLastActivity > (timeout + 5000)) {
         // Session expirée pendant l'absence
         console.log('🔒 Session expirée (inactivité depuis', Math.round(timeSinceLastActivity / 60000), 'minutes)');
         logout();
