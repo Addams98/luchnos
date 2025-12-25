@@ -127,10 +127,7 @@ app.get('/', (req, res) => {
   res.json({ message: '🕯️ Bienvenue sur l\'API Lampe Allumée (Luchnos)' });
 });
 
-// � Route de setup admin (⚠️ À DÉSACTIVER EN PRODUCTION)
-app.use('/api/setup-admin', require('./routes/setup-admin'));
-
-// �🔍 Route de santé pour debug CORS
+// � Route de santé pour debug CORS
 app.get('/api/health', (req, res) => {
   res.json({ 
     success: true,

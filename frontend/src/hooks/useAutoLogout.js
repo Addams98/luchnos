@@ -107,12 +107,25 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
     const lastActivity = localStorage.getItem('luchnos_last_activity');
     const hasToken = localStorage.getItem('luchnos_access_token') || localStorage.getItem('luchnos_token');
     
+    console.log('🔍 [useAutoLogout] Vérification session:', {
+      hasToken: !!hasToken,
+      lastActivity: lastActivity,
+      timeout: timeout,
+      now: Date.now()
+    });
+    
     // Vérifier l'expiration UNIQUEMENT si:
     // 1. Il y a un token (utilisateur connecté)
     // 2. Il y a une dernière activité enregistrée
     // 3. Le temps écoulé dépasse le timeout
     if (hasToken && lastActivity) {
       const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
+      
+      console.log('⏱️ [useAutoLogout] Temps depuis dernière activité:', {
+        timeSinceLastActivity: timeSinceLastActivity,
+        timeoutPlusMarge: timeout + 5000,
+        willLogout: timeSinceLastActivity > (timeout + 5000)
+      });
       
       // Ajouter une marge de 5 secondes pour éviter les faux positifs lors de la connexion
       if (timeSinceLastActivity > (timeout + 5000)) {
