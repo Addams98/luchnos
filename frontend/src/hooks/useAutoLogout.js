@@ -83,6 +83,13 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
   };
 
   useEffect(() => {
+    // ✅ Solution simplifiée: Ne PAS vérifier l'ancien lastActivity au montage
+    // Ça élimine les faux positifs lors de la connexion
+    // On fait confiance au fait que Login.jsx définit un timestamp frais
+    
+    // Mettre à jour le timestamp immédiatement au montage
+    localStorage.setItem('luchnos_last_activity', Date.now().toString());
+    
     // Événements qui indiquent une activité utilisateur
     const events = [
       'mousedown',
@@ -95,6 +102,7 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
 
     // Réinitialiser le timer à chaque activité
     const handleActivity = () => {
+      localStorage.setItem('luchnos_last_activity', Date.now().toString());
       resetTimer();
     };
 
@@ -103,50 +111,8 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
       document.addEventListener(event, handleActivity);
     });
 
-    // Vérifier au chargement si la session est expirée (avant de démarrer le timer)
-    const lastActivity = localStorage.getItem('luchnos_last_activity');
-    const hasToken = localStorage.getItem('luchnos_access_token') || localStorage.getItem('luchnos_token');
-    
-    console.log('🔍 [useAutoLogout] Vérification session:', {
-      hasToken: !!hasToken,
-      lastActivity: lastActivity,
-      timeout: timeout,
-      now: Date.now()
-    });
-    
-    // Vérifier l'expiration UNIQUEMENT si:
-    // 1. Il y a un token (utilisateur connecté)
-    // 2. Il y a une dernière activité enregistrée
-    // 3. Le temps écoulé dépasse le timeout
-    if (hasToken && lastActivity) {
-      const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
-      
-      console.log('⏱️ [useAutoLogout] Temps depuis dernière activité:', {
-        timeSinceLastActivity: timeSinceLastActivity,
-        timeoutPlusMarge: timeout + 5000,
-        willLogout: timeSinceLastActivity > (timeout + 5000)
-      });
-      
-      // Ajouter une marge de 5 secondes pour éviter les faux positifs lors de la connexion
-      if (timeSinceLastActivity > (timeout + 5000)) {
-        // Session expirée pendant l'absence
-        console.log('🔒 Session expirée (inactivité depuis', Math.round(timeSinceLastActivity / 60000), 'minutes)');
-        logout();
-        return; // Ne pas continuer si on déconnecte
-      }
-    }
-
-    // Démarrer le timer initial (seulement si pas déconnecté)
+    // Démarrer le timer initial
     resetTimer();
-
-    // Sauvegarder le timestamp de dernière activité lors de la fermeture
-    const handleBeforeUnload = () => {
-      // Sauvegarder le moment de fermeture pour vérifier au prochain chargement
-      localStorage.setItem('luchnos_last_activity', Date.now().toString());
-    };
-
-    // Écouter la fermeture de page
-    window.addEventListener('beforeunload', handleBeforeUnload);
 
     // Nettoyer lors du démontage
     return () => {
@@ -157,8 +123,6 @@ const useAutoLogout = (timeout = 15 * 60 * 1000) => {
       events.forEach(event => {
         document.removeEventListener(event, handleActivity);
       });
-      
-      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [timeout]);
 

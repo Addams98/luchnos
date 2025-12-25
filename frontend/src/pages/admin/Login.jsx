@@ -33,29 +33,17 @@ const Login = () => {
         // 🔒 Sauvegarder les nouveaux tokens (access + refresh)
         const { accessToken, refreshToken, user } = response.data.data;
         
-        // 🕐 IMPORTANT: Définir le timestamp AVANT les tokens pour éviter race condition
-        const timestamp = Date.now().toString();
-        console.log('✅ [Login] Connexion réussie, sauvegarde données...', {
-          timestamp,
-          hasAccessToken: !!accessToken,
-          hasRefreshToken: !!refreshToken,
-          user: user?.email
-        });
-        
-        localStorage.setItem('luchnos_last_activity', timestamp);
+        // Sauvegarder les tokens et données utilisateur
         localStorage.setItem('luchnos_access_token', accessToken);
         localStorage.setItem('luchnos_refresh_token', refreshToken);
         localStorage.setItem('luchnos_user', JSON.stringify(user));
+        localStorage.setItem('luchnos_last_activity', Date.now().toString());
         
         // Migration : supprimer l'ancien token si présent
         localStorage.removeItem('luchnos_token');
         
-        console.log('🚀 [Login] Redirection vers dashboard...');
-        
-        // Petit délai pour s'assurer que localStorage est bien synchronisé
-        setTimeout(() => {
-          navigate('/admin/dashboard');
-        }, 100);
+        // Rediriger vers le dashboard
+        navigate('/admin/dashboard');
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Erreur de connexion');
