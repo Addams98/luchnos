@@ -13,7 +13,7 @@ import {
   FaTimesCircle
 } from 'react-icons/fa';
 import AdminLayout from '../../components/AdminLayout';
-import { livresAPI, adminAPI, BASE_URL } from '../../services/api';
+import { livresAPI, adminAPI, BASE_URL, getImageUrl } from '../../services/api';
 
 const Livres = () => {
   const [livres, setLivres] = useState([]);
@@ -177,7 +177,7 @@ const Livres = () => {
         image_couverture: livre.image_couverture || '',
         pdf_url: livre.pdf_url || ''
       });
-      setImagePreview(livre.image_couverture ? `${BASE_URL}${livre.image_couverture}` : '');
+      setImagePreview(livre.image_couverture ? getImageUrl(livre.image_couverture) : '');
       setPdfFileName(livre.pdf_url ? livre.pdf_url.split('/').pop() : '');
     } else {
       setEditingLivre(null);
@@ -267,7 +267,7 @@ const Livres = () => {
             <div className="h-48 bg-gradient-to-br from-copper to-copper-light flex items-center justify-center">
               {livre.image_couverture ? (
                 <img 
-                  src={`${BASE_URL}${livre.image_couverture}`}
+                  src={getImageUrl(livre.image_couverture)}
                   alt={livre.titre}
                   className="w-full h-full object-cover"
                 />

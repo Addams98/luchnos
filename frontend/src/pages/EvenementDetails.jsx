@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaArrowLeft, FaUser } from 'react-icons/fa';
-import { evenementsAPI, BASE_URL } from '../services/api';
+import { evenementsAPI, BASE_URL, getImageUrl } from '../services/api';
 
 const EvenementDetails = () => {
   const { id } = useParams();
@@ -98,7 +98,7 @@ const EvenementDetails = () => {
           {evenement.image_url && (
             <div className="relative h-96 overflow-hidden">
               <img
-                src={`${BASE_URL}${evenement.image_url}`}
+                src={getImageUrl(evenement.image_url)}
                 alt={evenement.titre}
                 className="w-full h-full object-cover"
               />

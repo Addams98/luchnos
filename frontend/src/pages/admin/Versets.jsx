@@ -75,7 +75,7 @@ const Versets = () => {
       actif: verset.actif,
       ordre: verset.ordre
     });
-    setImagePreview(verset.image_url ? `${BASE_URL}${verset.image_url}` : '');
+    setImagePreview(verset.image_url ? getImageUrl(verset.image_url) : '');
     setShowModal(true);
   };
 

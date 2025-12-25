@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaBook, FaDownload, FaSearch, FaCheckCircle, FaFilter, FaFeatherAlt } from 'react-icons/fa';
-import { livresAPI, BASE_URL } from '../services/api';
+import { livresAPI, BASE_URL, getImageUrl } from '../services/api';
 
 const Edition = () => {
   const [livres, setLivres] = useState([]);
@@ -234,7 +234,7 @@ const Edition = () => {
                   <div className="relative overflow-hidden bg-gradient-primary p-4 book-cover-3d perspective-container">
                     {livre.image_couverture ? (
                       <img
-                        src={`${BASE_URL}${livre.image_couverture}`}
+                        src={getImageUrl(livre.image_couverture)}
                         alt={livre.titre}
                         className="w-full h-64 object-contain"
                       />
@@ -315,7 +315,7 @@ const Edition = () => {
               <div className="bg-gradient-primary p-8 rounded-xl flex items-center justify-center book-cover-3d perspective-container">
                 {selectedBook.image_couverture ? (
                   <img
-                    src={`${BASE_URL}${selectedBook.image_couverture}`}
+                    src={getImageUrl(selectedBook.image_couverture)}
                     alt={selectedBook.titre}
                     className="max-h-96 object-contain"
                   />

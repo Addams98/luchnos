@@ -83,7 +83,7 @@ const Pensees = () => {
       actif: pensee.actif,
       ordre: pensee.ordre
     });
-    setImagePreview(pensee.image_url ? `${BASE_URL}${pensee.image_url}` : '');
+    setImagePreview(pensee.image_url ? getImageUrl(pensee.image_url) : '');
     setShowModal(true);
   };
 

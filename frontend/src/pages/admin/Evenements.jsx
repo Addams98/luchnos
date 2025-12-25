@@ -12,7 +12,7 @@ import {
   FaTimesCircle
 } from 'react-icons/fa';
 import AdminLayout from '../../components/AdminLayout';
-import { evenementsAPI, adminAPI, BASE_URL } from '../../services/api';
+import { evenementsAPI, adminAPI, BASE_URL, getImageUrl } from '../../services/api';
 
 const Evenements = () => {
   const [evenements, setEvenements] = useState([]);
@@ -138,7 +138,7 @@ const Evenements = () => {
         image_url: event.image_url || '',
         actif: event.actif !== undefined ? event.actif : true
       });
-      setImagePreview(event.image_url ? `${BASE_URL}${event.image_url}` : '');
+      setImagePreview(event.image_url ? getImageUrl(event.image_url) : '');
     } else {
       setEditingEvent(null);
       setFormData({

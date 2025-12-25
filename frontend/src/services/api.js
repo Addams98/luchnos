@@ -37,6 +37,24 @@ console.log('📁 BASE URL:', BASE_URL);
 console.log('🌍 Environment:', isProduction ? 'Production (Render)' : 'Development (Local)');
 
 /**
+ * Construit l'URL complète d'une image
+ * Gère les URLs Cloudinary (complètes) et locales (relatives)
+ * @param {string} imagePath - Chemin de l'image (/uploads/... ou https://res.cloudinary.com/...)
+ * @returns {string} URL complète de l'image
+ */
+export function getImageUrl(imagePath) {
+  if (!imagePath) return '';
+  
+  // Si l'URL commence par http:// ou https://, c'est déjà une URL complète (Cloudinary)
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  
+  // Sinon, c'est un chemin local, ajouter BASE_URL
+  return `${BASE_URL}${imagePath}`;
+}
+
+/**
  * Instance Axios configurée pour l'API
  * Headers par défaut: Content-Type application/json
  * Base URL déterminée par l'environnement
